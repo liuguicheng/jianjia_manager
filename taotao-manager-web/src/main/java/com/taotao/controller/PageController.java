@@ -6,12 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 页面跳转controller
- * <p>Title: PageController</p>
- * <p>Description: </p>
- * <p>Company: www.itcast.com</p> 
- * @author	入云龙
- * @date	2015年9月2日上午11:11:41
- * @version 1.0
  */
 @Controller
 public class PageController {
@@ -23,15 +17,49 @@ public class PageController {
 	public String showIndex() {
 		return "index";
 	}
+	
 	/**
-	 * 展示其他页面
-	 * <p>Title: showpage</p>
-	 * <p>Description: </p>
-	 * @param page
-	 * @return
+	 * 展示其他页面 JSP目录下
 	 */
 	@RequestMapping("/{page}")
 	public String showpage(@PathVariable String page) {
 		return page;
+	}
+	/**
+	 * 展示其他页面 console目录下
+	 */
+	@RequestMapping("/console/main/{page}")
+	public String showpage2(@PathVariable String page) {
+		return "console/main/"+page;
+	}
+	/**
+	 * 展示其他页面 common目录下
+	 */
+	@RequestMapping("/common/{page}")
+	public String showpage3(@PathVariable String page) {
+		return "common/"+page;
+	}
+	/**
+	 * 展示其他页面 commodity目录下
+	 */
+	@RequestMapping("/commodity/{page}")
+	public String showpage4(@PathVariable String page) {
+		return "commodity/"+page;
+	}
+	
+	/**
+	 * 展示其他页面 common目录下
+	 */
+	@RequestMapping("/system/{page}")
+	public String showpage5(@PathVariable String page) {
+		return "system/"+page;
+	}
+	
+	/**
+	 * 展示其他页面 common目录下
+	 */
+	@RequestMapping("/nav/{page}")
+	public String showpage6(@PathVariable String page) {
+		return "nav/"+page;
 	}
 }
