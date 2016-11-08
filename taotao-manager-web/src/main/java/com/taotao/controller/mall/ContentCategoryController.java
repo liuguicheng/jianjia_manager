@@ -1,4 +1,4 @@
-package com.taotao.controller;
+package com.taotao.controller.mall;
 
 import java.util.List;
 

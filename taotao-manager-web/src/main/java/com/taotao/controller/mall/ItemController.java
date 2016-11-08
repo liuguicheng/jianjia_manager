@@ -1,4 +1,4 @@
-package com.taotao.controller;
+package com.taotao.controller.mall;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

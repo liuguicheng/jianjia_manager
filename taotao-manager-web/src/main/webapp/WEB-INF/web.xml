@@ -17,6 +17,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/applicationContext-*.xml</param-value>
 	</context-param>
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
@@ -33,8 +34,24 @@
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
 	
-   
+	<!--PowerFilter过滤器 -->
+	<filter>
+		<filter-name>PowerFilter</filter-name>
+		<filter-class>com.taotao.filter.PowerFilter</filter-class>
+		<init-param>
+			<param-name>failPage</param-name>
+			<param-value>/jump.html</param-value>
+		</init-param>
+	</filter>
+
+	<!--PowerFilter过滤.do资源 -->
+	<filter-mapping>
+		<filter-name>PowerFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
 	<!-- springmvc的前端控制器 -->
 	<servlet>
 		<servlet-name>taotao-manager</servlet-name>
@@ -55,7 +72,7 @@
 		<servlet-name>taotao-manager</servlet-name>
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>taotao-manager</servlet-name>
 		<url-pattern>*.po</url-pattern>

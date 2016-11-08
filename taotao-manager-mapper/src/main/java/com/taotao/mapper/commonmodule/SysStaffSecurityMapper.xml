@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taotao.mapper.commonmodule.SysStaffSecurityMapper" >
+  <resultMap id="BaseResultMap" type="com.taotao.pojo.commonmodule.SysStaffSecurity" >
+    <id column="SSID" property="ssid" jdbcType="VARCHAR" />
+    <result column="CHANGE_TIME" property="changeTime" jdbcType="TIMESTAMP" />
+    <result column="FAILED_TIMES" property="failedTimes" jdbcType="INTEGER" />
+    <result column="TIMES" property="times" jdbcType="INTEGER" />
+    <result column="FAILED_RECORD_TIME" property="failedRecordTime" jdbcType="TIMESTAMP" />
+    <result column="STAFF_ID" property="staffId" jdbcType="VARCHAR" />
+    <result column="IS_LOCK" property="isLock" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SSID, CHANGE_TIME, FAILED_TIMES, TIMES, FAILED_RECORD_TIME, STAFF_ID, IS_LOCK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.commonmodule.SysStaffSecurityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_staff_security
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_staff_security
+    where SSID = #{ssid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_staff_security
+    where SSID = #{ssid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.taotao.pojo.commonmodule.SysStaffSecurityExample" >
+    delete from sys_staff_security
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.taotao.pojo.commonmodule.SysStaffSecurity" >
+    insert into sys_staff_security (SSID, CHANGE_TIME, FAILED_TIMES, 
+      TIMES, FAILED_RECORD_TIME, STAFF_ID, 
+      IS_LOCK)
+    values (#{ssid,jdbcType=VARCHAR}, #{changeTime,jdbcType=TIMESTAMP}, #{failedTimes,jdbcType=INTEGER}, 
+      #{times,jdbcType=INTEGER}, #{failedRecordTime,jdbcType=TIMESTAMP}, #{staffId,jdbcType=VARCHAR}, 
+      #{isLock,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taotao.pojo.commonmodule.SysStaffSecurity" >
+    insert into sys_staff_security
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ssid != null" >
+        SSID,
+      </if>
+      <if test="changeTime != null" >
+        CHANGE_TIME,
+      </if>
+      <if test="failedTimes != null" >
+        FAILED_TIMES,
+      </if>
+      <if test="times != null" >
+        TIMES,
+      </if>
+      <if test="failedRecordTime != null" >
+        FAILED_RECORD_TIME,
+      </if>
+      <if test="staffId != null" >
+        STAFF_ID,
+      </if>
+      <if test="isLock != null" >
+        IS_LOCK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ssid != null" >
+        #{ssid,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failedTimes != null" >
+        #{failedTimes,jdbcType=INTEGER},
+      </if>
+      <if test="times != null" >
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="failedRecordTime != null" >
+        #{failedRecordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        #{isLock,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.taotao.pojo.commonmodule.SysStaffSecurityExample" resultType="java.lang.Integer" >
+    select count(*) from sys_staff_security
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_staff_security
+    <set >
+      <if test="record.ssid != null" >
+        SSID = #{record.ssid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changeTime != null" >
+        CHANGE_TIME = #{record.changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.failedTimes != null" >
+        FAILED_TIMES = #{record.failedTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.times != null" >
+        TIMES = #{record.times,jdbcType=INTEGER},
+      </if>
+      <if test="record.failedRecordTime != null" >
+        FAILED_RECORD_TIME = #{record.failedRecordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.staffId != null" >
+        STAFF_ID = #{record.staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLock != null" >
+        IS_LOCK = #{record.isLock,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_staff_security
+    set SSID = #{record.ssid,jdbcType=VARCHAR},
+      CHANGE_TIME = #{record.changeTime,jdbcType=TIMESTAMP},
+      FAILED_TIMES = #{record.failedTimes,jdbcType=INTEGER},
+      TIMES = #{record.times,jdbcType=INTEGER},
+      FAILED_RECORD_TIME = #{record.failedRecordTime,jdbcType=TIMESTAMP},
+      STAFF_ID = #{record.staffId,jdbcType=VARCHAR},
+      IS_LOCK = #{record.isLock,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taotao.pojo.commonmodule.SysStaffSecurity" >
+    update sys_staff_security
+    <set >
+      <if test="changeTime != null" >
+        CHANGE_TIME = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failedTimes != null" >
+        FAILED_TIMES = #{failedTimes,jdbcType=INTEGER},
+      </if>
+      <if test="times != null" >
+        TIMES = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="failedRecordTime != null" >
+        FAILED_RECORD_TIME = #{failedRecordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffId != null" >
+        STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="isLock != null" >
+        IS_LOCK = #{isLock,jdbcType=CHAR},
+      </if>
+    </set>
+    where SSID = #{ssid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taotao.pojo.commonmodule.SysStaffSecurity" >
+    update sys_staff_security
+    set CHANGE_TIME = #{changeTime,jdbcType=TIMESTAMP},
+      FAILED_TIMES = #{failedTimes,jdbcType=INTEGER},
+      TIMES = #{times,jdbcType=INTEGER},
+      FAILED_RECORD_TIME = #{failedRecordTime,jdbcType=TIMESTAMP},
+      STAFF_ID = #{staffId,jdbcType=VARCHAR},
+      IS_LOCK = #{isLock,jdbcType=CHAR}
+    where SSID = #{ssid,jdbcType=VARCHAR}
+  </update>
+</mapper>
