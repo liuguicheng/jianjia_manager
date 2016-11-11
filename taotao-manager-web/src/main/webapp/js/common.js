@@ -249,3 +249,14 @@ var TT = TAOTAO = {
 		});
     }
 };
+
+function searchclick(){
+	 $('#top-search').bind('keypress', function (event) {
+         if (event.keyCode == "13") {
+             //需要处理的事情
+         	window.open("http://localhost:8090/console/main/searchPage.do");
+         }
+     });
+	 return false;
+}
+

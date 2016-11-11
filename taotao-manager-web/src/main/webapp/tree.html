@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jstree</title>
+    <link href="../skins/skinsH/css/plugins/jsTree/style.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="ibox-content">
+    <div id="using_json"></div>
+</div>
+<input type="button" value="打开选择的id" onclick="openId();">
+</body>
+<script src="../skins/skinsH/js/jquery.min.js"></script>
+<script src="../skins/skinsH/js/plugins/jsTree/jstree.min.js"></script>
+<script>
+
+    function openId(){
+        //获取选中的节点
+        var nodes=$("#using_json").jstree("get_checked");
+        alert(nodes);
+    }
+    $(function(){
+        $("#using_json").jstree({
+            "core": {
+                "data": ["Empty Folder", {
+                    "id":1,
+                    "text": "Resources",
+                    "state": {
+                        "opened": true
+                    },
+                    "children": [{
+                        "id":2,
+                        "text": "css",
+                        "children": [{
+                            "id":3,
+                            "text": "animate.css",
+                            "icon": "none"
+                             },
+                            {
+                                "id":4,
+                                "text": "bootstrap.css",
+                                "icon": "none"
+                            },
+                            {
+                                "id":5,
+                                "text": "main.css",
+                                "icon": "none"
+                            },
+                            {
+                                "id":6,
+                                "text": "style.css",
+                                "icon": "none"
+                            }],
+                        "state": {
+                            "opened": true
+                        }
+                    },
+                        {
+                            "id":20,
+                            "text": "js",
+                            "children": [{
+                                "id":7,
+                                "text": "bootstrap.js",
+                                "icon": "none"
+                            },
+                                {
+                                    "id":8,
+                                    "text": "hplus.min.js",
+                                    "icon": "none"
+                                },
+                                {
+                                    "id":9,
+                                    "text": "jquery.min.js",
+                                    "icon": "none",
+                                    "state":{
+                                        "selected":true
+                                    }
+                                },
+                                {
+                                    "id":10,
+                                    "text": "jsTree.min.js",
+                                    "icon": "none"
+                                },
+                                {
+                                    "id":11,
+                                    "text": "custom.min.js",
+                                    "icon": "none"
+                                }],
+                            "state": {
+                                "opened": true
+                            }
+                        },
+                        {
+                            "id":17,
+                            "text": "html",
+                            "children": [{
+                                "id":12,
+                                "text": "layout.html",
+                                "icon": "none"
+                            },
+                                {
+                                    "id":13,
+                                    "text": "navigation.html",
+                                    "icon": "none"
+                                },
+                                {
+                                    "id":14,
+                                    "text": "navbar.html",
+                                    "icon": "none"
+                                },
+                                {
+                                    "id":15,
+                                    "text": "footer.html",
+                                    "icon": "none"
+                                },
+                                {
+                                    "id":16,
+                                    "text": "sidebar.html",
+                                    "icon": "none"
+                                }],
+                            "state": {
+                                "opened": true
+                            }
+                        }]
+                },
+                    "Fonts", "Images", "Scripts", "Templates", ]
+            },
+            "checkbox" : {
+                "keep_selected_style" : false
+            },
+            "plugins" : [ "wholerow", "checkbox" ]
+        })
+    });
+</script>
+</html>
