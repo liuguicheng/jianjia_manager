@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.taotao.common.pojo.EUDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbContent;
 import com.taotao.service.ContentService;
@@ -29,6 +30,25 @@ public class ContentController {
 	@ResponseBody
 	public TaotaoResult insertContent(TbContent content) {
 		TaotaoResult result = contentService.insertContent(content);
+		return result;
+	}
+	/**
+	 * 需求：根据内容分类Id，查询内容分类下面内容表 
+	 * 请求：/content/query/list
+	 *  参数：Long categoryId
+	 * 分页参数：EasyUI框架自动传递：integer page,integer rows 
+	 * 返回值：json格式EasyUIResult
+	 * easyUI框架需要分页返回值信息格式如下： {total:6,rows:[{},{},{}]}
+	 */
+	@RequestMapping("/query/list")
+	public @ResponseBody EUDataGridResult findContentByCategoryId(Long categoryId, Integer page, Integer rows) {
+		EUDataGridResult easyUIResult = contentService.findContentByCategoryId(categoryId, page, rows);
+		return easyUIResult;
+	}
+	
+	@RequestMapping("/delete")
+	public @ResponseBody TaotaoResult saveContent(Long ids) {
+		TaotaoResult result = contentService.deleteByContentId(ids);
 		return result;
 	}
 }

@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.1/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.1/themes/icon.css" />
+<script type="text/javascript" src="/js/jquery-easyui-1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 <table class="easyui-datagrid" id="itemList" title="商品列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,url:'/item/list',method:'get',pageSize:30,toolbar:toolbar">
+       data-options="singleSelect:false,collapsible:true,pagination:true,url:'/item/list.do',method:'get',pageSize:20,toolbar:toolbar">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -17,7 +23,7 @@
         </tr>
     </thead>
 </table>
-<div id="itemEditWindow" class="easyui-window" title="编辑商品" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/rest/page/item-edit'" style="width:80%;height:80%;padding:10px;">
+<div id="itemEditWindow" class="easyui-window" title="编辑商品" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/rest/page/item-edit.do'" style="width:80%;height:80%;padding:10px;">
 </div>
 <script>
 
@@ -117,7 +123,7 @@
         	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/rest/item/delete",params, function(data){
+                	$.post("/rest/item/delete.do",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','删除商品成功!',undefined,function(){
             					$("#itemList").datagrid("reload");
@@ -139,7 +145,7 @@
         	$.messager.confirm('确认','确定下架ID为 '+ids+' 的商品吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/rest/item/instock",params, function(data){
+                	$.post("/rest/item/instock.do",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','下架商品成功!',undefined,function(){
             					$("#itemList").datagrid("reload");
@@ -161,7 +167,7 @@
         	$.messager.confirm('确认','确定上架ID为 '+ids+' 的商品吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/rest/item/reshelf",params, function(data){
+                	$.post("/rest/item/reshelf.do",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','上架商品成功!',undefined,function(){
             					$("#itemList").datagrid("reload");

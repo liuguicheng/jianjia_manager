@@ -1,4 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.1/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.1/themes/icon.css" />
+<script type="text/javascript" src="/js/jquery-easyui-1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 <div>
 	 <ul id="contentCategory" class="easyui-tree">
     </ul>
@@ -12,7 +18,7 @@
 <script type="text/javascript">
 $(function(){
 	$("#contentCategory").tree({
-		url : '/content/category/list',
+		url : '/content/category/list.do',
 		animate: true,
 		method : "GET",
 		onContextMenu: function(e,node){
@@ -27,7 +33,7 @@ $(function(){
         	var _tree = $(this);
         	if(node.id == 0){
         		// 新增节点
-        		$.post("/content/category/create",{parentId:node.parentId,name:node.text},function(data){
+        		$.post("/content/category/create.do",{parentId:node.parentId,name:node.text},function(data){
         			if(data.status == 200){
         				_tree.tree("update",{
             				target : node.target,
@@ -38,7 +44,7 @@ $(function(){
         			}
         		});
         	}else{
-        		$.post("/content/category/update",{id:node.id,name:node.text});
+        		$.post("/content/category/update.do",{id:node.id,name:node.text});
         	}
         }
 	});
@@ -62,7 +68,7 @@ function menuHandler(item){
 	}else if(item.name === "delete"){
 		$.messager.confirm('确认','确定删除名为 '+node.text+' 的分类吗？',function(r){
 			if(r){
-				$.post("/content/category/delete/",{parentId:node.parentId,id:node.id},function(){
+				$.post("/content/category/delete.do/",{parentId:node.parentId,id:node.id},function(){
 					tree.tree("remove",node.target);
 				});	
 			}

@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.1/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.1/themes/icon.css" />
+<script type="text/javascript" src="/js/jquery-easyui-1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 <table class="easyui-datagrid" id="itemParamList" title="商品列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,url:'/item/param/list',method:'get',pageSize:30,toolbar:itemParamListToolbar">
+       data-options="singleSelect:false,collapsible:true,pagination:true,url:'/item/param/list.do',method:'get',pageSize:30,toolbar:itemParamListToolbar">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -13,7 +19,7 @@
         </tr>
     </thead>
 </table>
-<div id="itemEditWindow" class="easyui-window" title="编辑商品" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/item-edit'" style="width:80%;height:80%;padding:10px;">
+<div id="itemEditWindow" class="easyui-window" title="编辑商品" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/plugins/content/item-edit.do'" style="width:80%;height:80%;padding:10px;">
 </div>
 <script>
 
@@ -42,7 +48,7 @@
         iconCls:'icon-add',
         handler:function(){
         	TAOTAO.createWindow({
-        		url : "/item-param-add",
+        		url : "/item-param-add.do",
         	});
         }
     },{
@@ -63,7 +69,7 @@
         	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品规格吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/item/param/delete",params, function(data){
+                	$.post("/item/param/delete.do",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','删除商品规格成功!',undefined,function(){
             					$("#itemParamList").datagrid("reload");
