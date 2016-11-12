@@ -30,51 +30,38 @@
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="ibox float-e-margins">
-			<div class="ibox-content">
-				<div class="row row-lg">
-					<div class="col-sm-12">
-						<!-- Example Events -->
-						<div class="example-wrap">
-							<h4 class="example-title">菜单管理</h4>
-							<div class="example">
-								<div class="ibox-content">
-									<div id="toolbar" class="btn-group">
-										<a class="J_menuItem btn btn-outline  btn-default"
-											id="addid" data-index="111"><i
-											class="glyphicon glyphicon-plus"></i>新增 </a> <a
-											class=" btn btn-outline  btn-default"
-											 id="delid" ><i
-											class="glyphicon glyphicon-trash"></i>删除 </a>
-									</div>
-									<table id="table" data-toggle="table"
-										data-url="/power/powerAjax/list.do"
-										data-sort-name="powerTypeFlag" data-sort-order="asc"
-										data-search="true" data-show-refresh="true"
-										data-show-toggle="true" data-pagination="true"
-										data-toolbar="#toolbar" data-query-params="queryParams"
-										data-height="548">
-										<thead>
-											<tr>
-												<th data-field="stat" data-checkbox="true"></th>
-												<th data-field="powerId" data-visible="false">菜单编号</th>
-												<th data-field="powerTypeFlag" >排序</th>
-												<th data-field="powerName" data-sortable="true"
-													data-formatter="runningFormatter">菜单名称</th>
-												<th data-field="url" data-sortable="true">菜单url</th>
-												<th data-field="imgurl" data-sortable="true">菜单图标url</th>
-											</tr>
-										</thead>
-									</table>
-
-								</div>
-
-								<div class="clearfix"></div>
-							</div>
-						</div>
-						<!-- End Example Events -->
-					</div>
-				</div>
+			<div class="ibox-title">
+				<h5>菜单管理</h5>
 			</div>
+			<div class="ibox-content">
+				<div id="toolbar" class="btn-group">
+					<a class="J_menuItem btn btn-outline  btn-default" id="addid"
+						data-index="111"><i class="glyphicon glyphicon-plus"></i>新增 </a> <a
+						class=" btn btn-outline  btn-default" id="delid"><i
+						class="glyphicon glyphicon-trash"></i>删除 </a>
+				</div>
+				<table id="table" data-toggle="table"
+					data-url="/power/powerAjax/list.do" data-sort-name="powerTypeFlag"
+					data-sort-order="asc" data-search="true" data-show-refresh="true"
+					data-show-toggle="true" data-pagination="true"
+					data-toolbar="#toolbar" data-query-params="queryParams"
+					data-height="548">
+					<thead>
+						<tr>
+							<th data-field="stat" data-checkbox="true"></th>
+							<th data-field="powerId" data-visible="false">菜单编号</th>
+							<th data-field="powerTypeFlag">排序</th>
+							<th data-field="powerName" data-sortable="true"
+								data-formatter="runningFormatter">菜单名称</th>
+							<th data-field="url" data-sortable="true">菜单url</th>
+							<th data-field="imgurl" data-sortable="true">菜单图标url</th>
+						</tr>
+					</thead>
+				</table>
+
+			</div>
+
+			<div class="clearfix"></div>
 		</div>
 
 	</div>
