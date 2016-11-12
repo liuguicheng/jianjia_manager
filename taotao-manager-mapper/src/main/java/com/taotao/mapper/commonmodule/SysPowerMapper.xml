@@ -10,6 +10,8 @@
     <result column="POWER_CODE" property="powerCode" jdbcType="VARCHAR" />
     <result column="POWER_TYPE_FLAG" property="powerTypeFlag" jdbcType="CHAR" />
     <result column="passwordLevel" property="passwordlevel" jdbcType="INTEGER" />
+    <result column="POWER_PARENT_ID" property="powerParentId" jdbcType="VARCHAR" />
+    <result column="is_parent" property="isParent" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    POWER_ID, URL, POWER_NAME, IMGURL, MODULE_NAME, POWER_CODE, POWER_TYPE_FLAG, passwordLevel
+    POWER_ID, URL, POWER_NAME, IMGURL, MODULE_NAME, POWER_CODE, POWER_TYPE_FLAG, passwordLevel, 
+    POWER_PARENT_ID, is_parent
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.commonmodule.SysPowerExample" >
     select
@@ -105,10 +108,12 @@
   <insert id="insert" parameterType="com.taotao.pojo.commonmodule.SysPower" >
     insert into sys_power (POWER_ID, URL, POWER_NAME, 
       IMGURL, MODULE_NAME, POWER_CODE, 
-      POWER_TYPE_FLAG, passwordLevel)
+      POWER_TYPE_FLAG, passwordLevel, POWER_PARENT_ID, 
+      is_parent)
     values (#{powerId,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{powerName,jdbcType=VARCHAR}, 
       #{imgurl,jdbcType=VARCHAR}, #{moduleName,jdbcType=VARCHAR}, #{powerCode,jdbcType=VARCHAR}, 
-      #{powerTypeFlag,jdbcType=CHAR}, #{passwordlevel,jdbcType=INTEGER})
+      #{powerTypeFlag,jdbcType=CHAR}, #{passwordlevel,jdbcType=INTEGER}, #{powerParentId,jdbcType=VARCHAR}, 
+      #{isParent,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.taotao.pojo.commonmodule.SysPower" >
     insert into sys_power
@@ -137,6 +142,12 @@
       <if test="passwordlevel != null" >
         passwordLevel,
       </if>
+      <if test="powerParentId != null" >
+        POWER_PARENT_ID,
+      </if>
+      <if test="isParent != null" >
+        is_parent,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="powerId != null" >
@@ -162,6 +173,12 @@
       </if>
       <if test="passwordlevel != null" >
         #{passwordlevel,jdbcType=INTEGER},
+      </if>
+      <if test="powerParentId != null" >
+        #{powerParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null" >
+        #{isParent,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -198,6 +215,12 @@
       <if test="record.passwordlevel != null" >
         passwordLevel = #{record.passwordlevel,jdbcType=INTEGER},
       </if>
+      <if test="record.powerParentId != null" >
+        POWER_PARENT_ID = #{record.powerParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isParent != null" >
+        is_parent = #{record.isParent,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +235,9 @@
       MODULE_NAME = #{record.moduleName,jdbcType=VARCHAR},
       POWER_CODE = #{record.powerCode,jdbcType=VARCHAR},
       POWER_TYPE_FLAG = #{record.powerTypeFlag,jdbcType=CHAR},
-      passwordLevel = #{record.passwordlevel,jdbcType=INTEGER}
+      passwordLevel = #{record.passwordlevel,jdbcType=INTEGER},
+      POWER_PARENT_ID = #{record.powerParentId,jdbcType=VARCHAR},
+      is_parent = #{record.isParent,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +266,12 @@
       <if test="passwordlevel != null" >
         passwordLevel = #{passwordlevel,jdbcType=INTEGER},
       </if>
+      <if test="powerParentId != null" >
+        POWER_PARENT_ID = #{powerParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="isParent != null" >
+        is_parent = #{isParent,jdbcType=BIT},
+      </if>
     </set>
     where POWER_ID = #{powerId,jdbcType=VARCHAR}
   </update>
@@ -252,7 +283,9 @@
       MODULE_NAME = #{moduleName,jdbcType=VARCHAR},
       POWER_CODE = #{powerCode,jdbcType=VARCHAR},
       POWER_TYPE_FLAG = #{powerTypeFlag,jdbcType=CHAR},
-      passwordLevel = #{passwordlevel,jdbcType=INTEGER}
+      passwordLevel = #{passwordlevel,jdbcType=INTEGER},
+      POWER_PARENT_ID = #{powerParentId,jdbcType=VARCHAR},
+      is_parent = #{isParent,jdbcType=BIT}
     where POWER_ID = #{powerId,jdbcType=VARCHAR}
   </update>
 </mapper>

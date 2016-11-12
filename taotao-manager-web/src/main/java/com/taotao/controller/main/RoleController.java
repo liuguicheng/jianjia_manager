@@ -41,10 +41,10 @@ public class RoleController {
 		return returnjson;
 	}
 	
-	@RequestMapping("/power/list")
-	@ResponseBody
-	public List<EUTreeNode> getContentCatList(@RequestParam(value="id", defaultValue="0")Long parentId) {
-		List<EUTreeNode> list = poserService.getPowerList(parentId);
-		return list;
-	}
+//	@RequestMapping("/power/list")
+//	@ResponseBody
+//	public List<EUTreeNode> getContentCatList(@RequestParam(value="id", defaultValue="0")Long parentId) {
+//		List<EUTreeNode> list = poserService.getPowerList(parentId);
+//		return list;
+//	}
 }

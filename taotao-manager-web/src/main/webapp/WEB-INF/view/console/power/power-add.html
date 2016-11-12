@@ -1,0 +1,116 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link href="../../skins/skinsH/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../skins/skinsH/css/font-awesome.min.css"
+	rel="stylesheet">
+<link href="../../skins/skinsH/css/animate.min.css" rel="stylesheet">
+<link href="../../skins/skinsH/css/style.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="../../skins/skinsH/css/plugins/layer/layer.css"
+	id="layui_layer_skinlayercss">
+<link rel="stylesheet"
+	href="../../skins/skinsH/css/plugins/layer/layer.ext.css"
+	id="layui_layer_skinlayerextcss">
+<link rel="stylesheet"
+	href="../../skins/skinsH/css/plugins/layer/moon_style.css"
+	id="layui_layer_skinmoonstylecss">
+<!-- Sweet Alert -->
+<link href="../../skins/skinsH/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+
+		<div class="ibox float-e-margins">
+			<div class="ibox-content">
+				<div class="row row-lg">
+					<div class="col-sm-12">
+						<!-- Example Events -->
+						<div class="example-wrap">
+							<h4 class="example-title" id="titleid">添加菜单</h4>
+							<div class="example">
+								<div class="ibox-content">
+									<form class="form-horizontal m-t" id="signupForm" method="post"
+										action="">
+										<input type="hidden" id="powerId" name="powerId" value="">
+										<input type="hidden" id="isParent" name="isParent" value="">
+										<div class="form-group">
+											<label class="col-sm-3 control-label">父菜单名称：</label>
+											<div class="col-sm-8">
+											 <select
+													class="form-control m-b" name="powerParentId"
+													id="powerParentId">
+													<option value="0">请选择父菜单</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">菜单名称：</label>
+											<div class="col-sm-8">
+												<input id="powerName" name="powerName" class="form-control"
+													type="text" aria-required="true" aria-invalid="false"
+													class="valid">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">菜单功能的url：</label>
+											<div class="col-sm-8">
+												<input id="url" name="url" class="form-control" type="text"
+													aria-required="true" aria-invalid="true" class="error">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">菜单图标的url：</label>
+											<div class="col-sm-8">
+												<input id="imgurl" name="imgurl" class="form-control"
+													type="text">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">菜单排序：</label>
+											<div class="col-sm-8">
+												<input id="powerTypeFlag" name="powerTypeFlag"
+													class="form-control" type="text">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-8 col-sm-offset-3">
+												<button class="btn btn-primary" type="submit">提交</button>
+												<button class="btn btn-warning" type="button"
+													onclick="goIndex(-1);">返回</button>
+											</div>
+										</div>
+									</form>
+								</div>
+
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<!-- End Example Events -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="../../skins/skinsH/js/jquery.min.js"></script>
+	<script src="../../skins/skinsH/js/bootstrap.min.js"></script>
+	<script
+		src="../../skins/skinsH/js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="../../skins/skinsH/js/plugins/validate/messages_zh.min.js"></script>
+	<script src="../../skins/skinsH/js/plugins/layer/layer.min.js"></script>
+	<script src="../../skins/skinsH/js/plugins/jsTree/jstree.min.js"></script>
+	<script
+		src="../../skins/skinsH/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<!-- 自己写 -->
+	<script type="text/javascript" src="../../skins/default/js/index.js"></script>
+	<!-- 验证 -->
+	<script src="../../skins/default/js/power-add-form-valiadate.js"></script>
+</body>
+</html>

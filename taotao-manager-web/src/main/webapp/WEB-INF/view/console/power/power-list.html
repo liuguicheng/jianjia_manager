@@ -13,47 +13,61 @@
 	rel="stylesheet">
 <link href="../../skins/skinsH/css/animate.min.css" rel="stylesheet">
 <link href="../../skins/skinsH/css/style.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="../../skins/skinsH/css/plugins/layer/layer.css"
+	id="layui_layer_skinlayercss">
+<link rel="stylesheet"
+	href="../../skins/skinsH/css/plugins/layer/layer.ext.css"
+	id="layui_layer_skinlayerextcss">
+<link rel="stylesheet"
+	href="../../skins/skinsH/css/plugins/layer/moon_style.css"
+	id="layui_layer_skinmoonstylecss">
+	<!-- Sweet Alert -->
+<link href="../../skins/skinsH/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
 </head>
 
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
-
 		<div class="ibox float-e-margins">
 			<div class="ibox-content">
 				<div class="row row-lg">
-
-
-
 					<div class="col-sm-12">
 						<!-- Example Events -->
 						<div class="example-wrap">
 							<h4 class="example-title">菜单管理</h4>
 							<div class="example">
 								<div class="ibox-content">
-								<div id="toolbar" class="btn-group">
-									<button type="button" class="btn btn-outline  btn-default">
-										<i class="glyphicon glyphicon-plus"></i>新增
-									</button>
-									<button type="button" class="btn btn-outline btn-default">
-										<i class="glyphicon glyphicon-trash"></i>删除
-									</button>
+									<div id="toolbar" class="btn-group">
+										<a class="J_menuItem btn btn-outline  btn-default"
+											id="addid" data-index="111"><i
+											class="glyphicon glyphicon-plus"></i>新增 </a> <a
+											class=" btn btn-outline  btn-default"
+											 id="delid" ><i
+											class="glyphicon glyphicon-trash"></i>删除 </a>
+									</div>
+									<table id="table" data-toggle="table"
+										data-url="/power/powerAjax/list.do"
+										data-sort-name="powerTypeFlag" data-sort-order="asc"
+										data-search="true" data-show-refresh="true"
+										data-show-toggle="true" data-pagination="true"
+										data-toolbar="#toolbar" data-query-params="queryParams"
+										data-height="548">
+										<thead>
+											<tr>
+												<th data-field="stat" data-checkbox="true"></th>
+												<th data-field="powerId" data-visible="false">菜单编号</th>
+												<th data-field="powerTypeFlag" >排序</th>
+												<th data-field="powerName" data-sortable="true"
+													data-formatter="runningFormatter">菜单名称</th>
+												<th data-field="url" data-sortable="true">菜单url</th>
+												<th data-field="imgurl" data-sortable="true">菜单图标url</th>
+											</tr>
+										</thead>
+									</table>
+
 								</div>
-								  <table id="mydatatableid" data-toggle="table" data-url="/power/powerAjax/list.do"
-									data-sort-name="powerCode" data-sort-order="desc"
-									data-search="true" data-show-refresh="true"
-									data-show-toggle="true" data-show-columns="true"
-									data-pagination="true" data-toolbar="#toolbar"
-									data-query-params="queryParams"  data-height="548">
-									<thead>
-										<tr>
-											<th data-field="powerCode" data-sortable="true">编号</th>
-											<th data-field="powerName" data-sortable="true">菜单名称</th>
-											<th data-field="url" data-sortable="true">菜单地址</th>
-											<th data-field="passwordlevel" data-sortable="true">访问等级</th>
-										</tr>
-									</thead>
-								</table>
-								</div>
+
 								<div class="clearfix"></div>
 							</div>
 						</div>
@@ -72,17 +86,96 @@
 		src="../../skins/skinsH/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	<script
 		src="../../skins/skinsH/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../../skins/skinsH/js/plugins/layer/layer.min.js"></script>
 		<script
+		src="../../skins/skinsH/js/plugins/sweetalert/sweetalert.min.js"></script>
 	<script type="text/javascript">
 		function queryParams() {
 			return {
-				type : 'owner',
-				sort : 'powerId',
-				direction : 'desc',
-				rows : 20,
+				rows : 100,
 				page : 1
 			};
 		}
+		var sd;
+		function runningFormatter(value, row, index) {
+			if (row.powerParentId != "0") {
+				return "&nbsp;&nbsp;&nbsp;&nbsp;" + value;
+			}
+			return value;
+		}
+		$(document).ready(function() {
+			$("#addid").click(function() {
+				window.location.href ="/power/power-add.do";
+			});
+			//删除
+			$("#delid").click(function() {
+				var $table = $('#table');
+				//获取选择行内容
+				var selects = $table.bootstrapTable('getSelections');
+				var selectsidjson = onselectid(selects);
+				console.log(selectsidjson);
+				if(selectsidjson.length>0){
+				
+				swal({
+					  title: "你确定?",
+					  text: "删除的数据将无法恢复!",
+					  type: "warning",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "是",
+					  cancelButtonText: "否",
+					  closeOnConfirm: false
+					},
+					function(isConfirm){
+					  if (isConfirm) {
+						  $.ajax({
+								type : "post",
+								url : "/power/del.do",
+								data : "ids="+selectsidjson,// ,
+								dataType : "json",
+								success : function(data) {
+									if(data.status=="200"){
+										swal({title:"操作提示",text:"删除成功",type:"success",closeOnConfirm: false} ,
+												function(){
+												location.reload() 
+												  });
+									}else{
+										swal({title:"操作提示",text:"删除失败", type:"error",closeOnConfirm: false })
+									}
+								}
+							}); 
+					  }
+					});
+				
+				}else{
+					swal("提示", "请选择要删除的菜单项", "warning");
+				}
+				
+				
+			});
+			
+			
+			$("#table").on('click-row.bs.table', function (e, row, $element) {
+				console.log(row.powerId);
+	    		$('.success').removeClass('success');
+	    		$($element).addClass('success');
+	    		window.location.href ="/power/power-add.do?id="+row.powerId;
+	  	});
+			
+		});
+		// 根据json 获取 选中id
+		function onselectid(selects) {
+			var str = "";
+			var newSelects = $.parseJSON(JSON.stringify(selects));
+			$.each(newSelects, function(n, value) {
+				str += value.powerId + ",";
+			});
+			str = str.substring(0, str.length - 1);
+			return str;
+		}
 	</script>
+	<script type="text/javascript" src="../../skins/default/js/index.js"></script>
+	<script src="../../skins/skinsH/js/contabs.min.js"
+		type="text/javascript"></script>
 </body>
 </html>

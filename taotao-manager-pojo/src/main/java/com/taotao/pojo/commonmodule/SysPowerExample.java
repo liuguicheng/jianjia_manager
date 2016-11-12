@@ -653,6 +653,136 @@ public class SysPowerExample {
             addCriterion("passwordLevel not between", value1, value2, "passwordlevel");
             return (Criteria) this;
         }
+
+        public Criteria andPowerParentIdIsNull() {
+            addCriterion("POWER_PARENT_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdIsNotNull() {
+            addCriterion("POWER_PARENT_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdEqualTo(String value) {
+            addCriterion("POWER_PARENT_ID =", value, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdNotEqualTo(String value) {
+            addCriterion("POWER_PARENT_ID <>", value, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdGreaterThan(String value) {
+            addCriterion("POWER_PARENT_ID >", value, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdGreaterThanOrEqualTo(String value) {
+            addCriterion("POWER_PARENT_ID >=", value, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdLessThan(String value) {
+            addCriterion("POWER_PARENT_ID <", value, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdLessThanOrEqualTo(String value) {
+            addCriterion("POWER_PARENT_ID <=", value, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdLike(String value) {
+            addCriterion("POWER_PARENT_ID like", value, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdNotLike(String value) {
+            addCriterion("POWER_PARENT_ID not like", value, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdIn(List<String> values) {
+            addCriterion("POWER_PARENT_ID in", values, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdNotIn(List<String> values) {
+            addCriterion("POWER_PARENT_ID not in", values, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdBetween(String value1, String value2) {
+            addCriterion("POWER_PARENT_ID between", value1, value2, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerParentIdNotBetween(String value1, String value2) {
+            addCriterion("POWER_PARENT_ID not between", value1, value2, "powerParentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentIsNull() {
+            addCriterion("is_parent is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentIsNotNull() {
+            addCriterion("is_parent is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentEqualTo(Boolean value) {
+            addCriterion("is_parent =", value, "isParent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentNotEqualTo(Boolean value) {
+            addCriterion("is_parent <>", value, "isParent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentGreaterThan(Boolean value) {
+            addCriterion("is_parent >", value, "isParent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_parent >=", value, "isParent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentLessThan(Boolean value) {
+            addCriterion("is_parent <", value, "isParent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_parent <=", value, "isParent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentIn(List<Boolean> values) {
+            addCriterion("is_parent in", values, "isParent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentNotIn(List<Boolean> values) {
+            addCriterion("is_parent not in", values, "isParent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_parent between", value1, value2, "isParent");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsParentNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_parent not between", value1, value2, "isParent");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

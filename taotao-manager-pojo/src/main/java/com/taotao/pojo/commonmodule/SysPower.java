@@ -17,6 +17,10 @@ public class SysPower {
 
     private Integer passwordlevel;
 
+    private String powerParentId;
+
+    private Boolean isParent;
+
     public String getPowerId() {
         return powerId;
     }
@@ -79,5 +83,21 @@ public class SysPower {
 
     public void setPasswordlevel(Integer passwordlevel) {
         this.passwordlevel = passwordlevel;
+    }
+
+    public String getPowerParentId() {
+        return powerParentId;
+    }
+
+    public void setPowerParentId(String powerParentId) {
+        this.powerParentId = powerParentId == null ? null : powerParentId.trim();
+    }
+
+    public Boolean getIsParent() {
+        return isParent;
+    }
+
+    public void setIsParent(Boolean isParent) {
+        this.isParent = isParent;
     }
 }

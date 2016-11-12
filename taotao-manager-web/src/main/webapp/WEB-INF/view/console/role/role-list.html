@@ -75,8 +75,8 @@
 	<script
 		src="../../skins/skinsH/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script type="text/javascript" src="../../skins/default/js/index.js"></script>
-	<script src="../../skins/skinsH/js/contabs.min.js"
-		type="text/javascript"></script><script type="text/javascript">
+	<script src="../../skins/skinsH/js/contabs.min.js"type="text/javascript"></script>
+	<script type="text/javascript">
 			function queryParams() {
 				return {
 					type : 'owner',
@@ -87,11 +87,9 @@
 				};
 			}
 			var $table = $('#table');
-			$(function() {
-			});
-			
+
 			//获取选择行内容
-			function onselect(){
+			function onselect() {
 				var selects = $table.bootstrapTable('getSelections');
 				var selectsidjson = onselectid(selects);
 				console.log(selectsidjson);
