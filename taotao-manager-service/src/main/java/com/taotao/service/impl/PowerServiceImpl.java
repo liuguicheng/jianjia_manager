@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EUDataGridResult;
 import com.taotao.common.pojo.EUTreeNode;
+import com.taotao.common.pojo.EUTreeNode2;
+import com.taotao.common.pojo.EUTreeState;
 import com.taotao.common.pojo.TaotaoResult;
-import com.taotao.common.utils.HttpClientUtil;
 import com.taotao.common.utils.IDUtils;
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.commonmodule.SysPowerMapper;
-import com.taotao.pojo.TbContentCategory;
-import com.taotao.pojo.TbItem;
 import com.taotao.pojo.commonmodule.SysPower;
 import com.taotao.pojo.commonmodule.SysPowerExample;
 import com.taotao.pojo.commonmodule.SysPowerExample.Criteria;
@@ -45,12 +43,12 @@ public class PowerServiceImpl implements PowerService {
 	}
 
 	@Override
-	public List<EUTreeNode> getPowerJsonList(String powerParentId) {
+	public List<EUTreeNode2> getPowerJsonList(String powerParentId) {
 
 		return queryPowerTreeNode(powerParentId);
 	}
 
-	private List<EUTreeNode> queryPowerTreeNode(String powerParentId) {
+	private List<EUTreeNode2> queryPowerTreeNode(String powerParentId) {
 		SysPowerExample example = new SysPowerExample();
 		Criteria criteria = example.createCriteria();
 		if (!powerParentId.equals("-1")) {
@@ -58,14 +56,15 @@ public class PowerServiceImpl implements PowerService {
 		}
 		List<SysPower> list = powerMapper.selectByExample(example);
 
-		List<EUTreeNode> resultList = new ArrayList<>();
+		List<EUTreeNode2> resultList = new ArrayList<EUTreeNode2>();
+		EUTreeState states = new EUTreeState(true, false);
 		if (list != null && !list.isEmpty()) {
 			for (SysPower power : list) {
 				// 创建一个节点
-				EUTreeNode node = new EUTreeNode();
+				EUTreeNode2 node = new EUTreeNode2();
 				node.setId(Long.valueOf(power.getPowerId()));
 				node.setText(power.getPowerName());
-				node.setState(power.getIsParent() ? "closed" : "open");
+				node.setState(states);
 				node.setChildren(queryPowerTreeNode(power.getPowerId()));
 				resultList.add(node);
 			}
@@ -77,21 +76,22 @@ public class PowerServiceImpl implements PowerService {
 	@Override
 	public TaotaoResult insertPower(SysPower sysPower) {
 		try {
-			if(sysPower.getPowerId().equals("")){
-				//新增
+			if (sysPower.getPowerId().equals("")) {
+				// 新增
 				sysPower.setPowerId(IDUtils.genImageName());
 				sysPower.setIsParent(false);
 				powerMapper.insert(sysPower);
-			}else{
-				//更新
+			} else {
+				// 更新
 				powerMapper.updateByPrimaryKey(sysPower);
 			}
-			
-			SysPower parentPower = powerMapper.selectByPrimaryKey(sysPower.getPowerParentId());
-			if (!parentPower.getIsParent()) {
-				parentPower.setIsParent(true);
-				// 更新父节点
-				powerMapper.updateByPrimaryKey(parentPower);
+			if (!sysPower.getPowerParentId().equals("0")) {
+				SysPower parentPower = powerMapper.selectByPrimaryKey(sysPower.getPowerParentId());
+				if (!parentPower.getIsParent()) {
+					parentPower.setIsParent(true);
+					// 更新父节点
+					powerMapper.updateByPrimaryKey(parentPower);
+				}
 			}
 			return TaotaoResult.ok(sysPower);
 		} catch (Exception e) {

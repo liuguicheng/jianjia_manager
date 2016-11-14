@@ -1,5 +1,6 @@
 package com.taotao.controller.main;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taotao.common.pojo.EUDataGridResult;
-import com.taotao.common.pojo.EUTreeNode;
+import com.taotao.common.pojo.EUTreeNode2;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.pojo.commonmodule.SysPower;
@@ -62,8 +63,8 @@ public class PowerController {
 	//tree形式的 菜单列表
 	@RequestMapping("/powerjsonAjax/list")
 	@ResponseBody
-	private List<EUTreeNode> getPowerJsonList(@RequestParam(value="id", defaultValue="0")String powerParentId) {
-		List<EUTreeNode> result = poserService.getPowerJsonList(powerParentId);
+	private List<EUTreeNode2> getPowerJsonList(@RequestParam(value="id", defaultValue="0")String powerParentId) {
+		List<EUTreeNode2> result = poserService.getPowerJsonList(powerParentId);
 		return result;
 	}
 }

@@ -83,6 +83,7 @@
 				page : 1
 			};
 		}
+		//自定义tr
 		var sd;
 		function runningFormatter(value, row, index) {
 			if (row.powerParentId != "0") {
@@ -90,6 +91,7 @@
 			}
 			return value;
 		}
+		
 		$(document).ready(function() {
 			$("#addid").click(function() {
 				window.location.href ="/power/power-add.do";

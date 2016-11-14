@@ -11,6 +11,8 @@ public class SysRole {
 
     private Integer sortOrder;
 
+    private String powerstr;
+
     public String getRoleId() {
         return roleId;
     }
@@ -49,5 +51,13 @@ public class SysRole {
 
     public void setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
+    }
+
+    public String getPowerstr() {
+        return powerstr;
+    }
+
+    public void setPowerstr(String powerstr) {
+        this.powerstr = powerstr == null ? null : powerstr.trim();
     }
 }

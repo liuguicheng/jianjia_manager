@@ -32,17 +32,21 @@
 
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5 class="example-title" id="titleid">角色管理</h5>
+				<h5 class="example-title" id="titleid">商城后台用户管理</h5>
 			</div>
 			<div class="ibox-content">
 				<div id="toolbar" class="btn-group">
 					<a class=" btn btn-outline  btn-default" href="javascript:void(0);"
-						id="addid"><i class="glyphicon glyphicon-plus"></i>新增 </a> <a
+						id="addid"><i class="glyphicon glyphicon-plus"></i>新增 </a><a
+						class=" btn btn-outline  btn-default" href="javascript:void(0);"
+						id="stopid"><i class="glyphicon glyphicon-ban-circle"></i>停用 </a><a
+						class=" btn btn-outline  btn-default" href="javascript:void(0);"
+						id="startid"><i class="glyphicon glyphicon-ok-circle"></i>启用 </a> <a
 						class=" btn btn-outline  btn-default" href="javascript:void(0);"
 						id="delid"><i class="glyphicon glyphicon-trash"></i>删除 </a>
 				</div>
 				<table id="table" data-toggle="table"
-					data-url="/role/powerRole/list.do" data-sort-name="roleId"
+					data-url="/userinfo/list.do" data-sort-name="staffId"
 					data-sort-order="asc" data-search="true" data-show-refresh="true"
 					data-show-toggle="true" data-show-columns="true"
 					data-pagination="true" data-toolbar="#toolbar"
@@ -50,10 +54,10 @@
 					<thead>
 						<tr>
 							<th data-field="stat" data-checkbox="true"></th>
-							<th data-field="roleId" data-visible="false">编号</th>
-							<th data-field="roleName" data-sortable="true">角色名称</th>
-							<th data-field="defaultHomeUrl" data-sortable="true">角色主页</th>
-							<th data-field="remark" data-sortable="true">备注</th>
+							<th data-field="loginName" data-sortable="true">用户名</th>
+							<th data-field="nickname" data-sortable="true">真实姓名</th>
+							<th data-field="roleName" data-sortable="true">角色</th>
+							<th data-formatter="runningFormatter">状态</th>
 						</tr>
 					</thead>
 				</table>
@@ -81,11 +85,149 @@
 					page : 1
 				};
 			}
+			//自定义tr
+			var sd;
+			function runningFormatter(value, row, index) {
+				if (row.isdel ==1) {
+					return "正常";
+				}else{
+					return "<span style='color:red;'>停用</span>";
+				}
+			}
 			$(document)
 					.ready(
 							function() {
+								//新增
 								$("#addid").click(function() {
-									window.location.href = "/role/role-add.do";
+									window.location.href = "/userinfo/user-add.do";
+								});
+								//停用
+								$("#stopid").click(function(){
+									var $table = $('#table');
+									//获取选择行内容
+									var selects = $table
+											.bootstrapTable('getSelections');
+									var selectsidjson = onselectid(selects);
+									if (selectsidjson.length > 0) {
+
+										swal(
+												{
+													title : "你确定?",
+													text : "停用您选择的用户？",
+													type : "warning",
+													showCancelButton : true,
+													confirmButtonColor : "#DD6B55",
+													confirmButtonText : "是",
+													cancelButtonText : "否",
+													closeOnConfirm : false
+												},
+												function(
+														isConfirm) {
+													if (isConfirm) {
+														$
+																.ajax({
+																	type : "post",
+																	url : "/userinfo/upd.do",
+																	data : "ids="
+																			+ selectsidjson+"&type=2",// ,
+																	dataType : "json",
+																	success : function(
+																			data) {
+																		if (data.status == "200") {
+																			swal(
+																					{
+																						title : "操作提示",
+																						text : "停用成功",
+																						type : "success",
+																						closeOnConfirm : false
+																					},
+																					function() {
+																						location
+																								.reload()
+																					});
+																		} else {
+																			swal({
+																				title : "操作提示",
+																				text : "停用失败",
+																				type : "error",
+																				closeOnConfirm : false
+																			})
+																		}
+																	}
+																});
+													}
+												});
+
+									} else {
+										swal("提示",
+												"请选择要停用的用户",
+												"warning");
+									}
+									
+								});
+								//启用
+								$("#startid").click(function(){
+									var $table = $('#table');
+									//获取选择行内容
+									var selects = $table
+											.bootstrapTable('getSelections');
+									var selectsidjson = onselectid(selects);
+									if (selectsidjson.length > 0) {
+
+										swal(
+												{
+													title : "你确定?",
+													text : "启用您选择的用户？",
+													type : "warning",
+													showCancelButton : true,
+													confirmButtonColor : "#DD6B55",
+													confirmButtonText : "是",
+													cancelButtonText : "否",
+													closeOnConfirm : false
+												},
+												function(
+														isConfirm) {
+													if (isConfirm) {
+														$
+																.ajax({
+																	type : "post",
+																	url : "/userinfo/upd.do",
+																	data : "ids="
+																			+ selectsidjson+"&type=1",// ,
+																	dataType : "json",
+																	success : function(
+																			data) {
+																		if (data.status == "200") {
+																			swal(
+																					{
+																						title : "操作提示",
+																						text : "启用成功",
+																						type : "success",
+																						closeOnConfirm : false
+																					},
+																					function() {
+																						location
+																								.reload()
+																					});
+																		} else {
+																			swal({
+																				title : "操作提示",
+																				text : "启用失败",
+																				type : "error",
+																				closeOnConfirm : false
+																			})
+																		}
+																	}
+																});
+													}
+												});
+
+									} else {
+										swal("提示",
+												"请选择要启用的用户",
+												"warning");
+									}
+									
 								});
 								//删除
 								$("#delid")
@@ -115,7 +257,7 @@
 																		$
 																				.ajax({
 																					type : "post",
-																					url : "/role/del.do",
+																					url : "/userinfo/del.do",
 																					data : "ids="
 																							+ selectsidjson,// ,
 																					dataType : "json",
@@ -148,7 +290,7 @@
 
 													} else {
 														swal("提示",
-																"请选择要删除的角色项",
+																"请选择要删除的用户",
 																"warning");
 													}
 
@@ -163,8 +305,8 @@
 															'success');
 													$($element).addClass(
 															'success');
-													window.location.href = "/role/role-add.do?id="
-															+ row.roleId;
+													window.location.href = "/userinfo/user-update.do?id="
+															+ row.staffId;
 												});
 
 							});
@@ -173,7 +315,7 @@
 				var str = "";
 				var newSelects = $.parseJSON(JSON.stringify(selects));
 				$.each(newSelects, function(n, value) {
-					str += value.roleId + ",";
+					str += value.staffId + ",";
 				});
 				str = str.substring(0, str.length - 1);
 				return str;

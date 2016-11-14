@@ -10,9 +10,7 @@
 	rel="stylesheet">
 <link href="../../skins/skinsH/css/animate.min.css" rel="stylesheet">
 <link href="../../skins/skinsH/css/style.min.css" rel="stylesheet">
-<link href="../../skins/skinsH/css/plugins/jsTree/style.min.css"
-	rel="stylesheet">
-	<!-- Sweet Alert -->
+<!-- Sweet Alert -->
 <link href="../../skins/skinsH/css/plugins/sweetalert/sweetalert.css"
 	rel="stylesheet">
 </head>
@@ -22,53 +20,37 @@
 
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5 class="example-title" id="titleid">添加角色</h5>
+				<h5 class="example-title" id="titleid">添加商城后台用户</h5>
 			</div>
 			<div class="ibox-content">
 				<form class="form-horizontal m-t" id="signupForm" method="post"
-										action="">
-				<input type="hidden" id="roleId" name="roleId">
-					<input type="hidden" id="powerStr" name="powerstr" type="text">
+					action="">
+					<input type="hidden" id="staffId" name="staffId"> 
+					<input type="hidden" id="roleName" name="roleName" >
+					<input type="hidden" id="isdel" name="isdel" >
+					<input type="hidden" id="password" name="password">
 					<div class="form-group">
-						<label class="col-sm-3 control-label">序号：</label>
+						<label class="col-sm-3 control-label">用户名：</label>
 						<div class="col-sm-8">
-							<input id="sortOrder" name="sortOrder" class="form-control"
+							<input id="loginName" name="loginName" class="form-control"
 								type="text">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-3 control-label">角色名称：</label>
+						<label class="col-sm-3 control-label">真实姓名：</label>
 						<div class="col-sm-8">
-							<input id="roleName" name="roleName" class="form-control"
-								type="text" aria-required="true" aria-invalid="false"
-								class="valid">
+							<input id="nickname" name="nickname" class="form-control" type="text">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-3 control-label">角色主页：</label>
+						<label class="col-sm-3 control-label">所属角色：</label>
 						<div class="col-sm-8">
-							<input id="defaultHomeUrl" name="defaultHomeUrl"
-								class="form-control" type="text" aria-required="true"
-								aria-invalid="true" class="error">
+							<select class="form-control m-b" name="roleId"
+								id="roleId">
+								<option value="0">请选择角色</option>
+							</select>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">角色说明：</label>
-						<div class="col-sm-8">
-							<input id="remark" name="remark" class="form-control"
-								type="text">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-8 col-sm-offset-3">
-							<h4 class="example-title">选择权限</h4>
-							<div class="ibox-content">
-								<div id="using_json"></div>
-								<!-- 例子 -->
-								<!--<div id="jstree_demo_div1"></div>  -->
-						</div>
-					</div>
-
 					<div class="form-group">
 						<div class="col-sm-8 col-sm-offset-3">
 							<button class="btn btn-primary" type="submit">提交</button>
@@ -88,12 +70,13 @@
 	<script
 		src="../../skins/skinsH/js/plugins/validate/jquery.validate.min.js"></script>
 	<script src="../../skins/skinsH/js/plugins/validate/messages_zh.min.js"></script>
-	<script src="../../skins/skinsH/js/plugins/jsTree/jstree.min.js"></script>
+	
 	<script
 		src="../../skins/skinsH/js/plugins/sweetalert/sweetalert.min.js"></script>
 	<!-- 自己写 -->
 	<script type="text/javascript" src="../../skins/default/js/index.js"></script>
-	<script type="text/javascript" src="../../skins/default/js/role-validate.min.js"></script>
-	<script type="text/javascript" src="../../skins/default/js/tree_power.js"></script>
+	<script type="text/javascript"
+		src="../../skins/default/js/user-validate.min.js"></script>
+
 </body>
 </html>

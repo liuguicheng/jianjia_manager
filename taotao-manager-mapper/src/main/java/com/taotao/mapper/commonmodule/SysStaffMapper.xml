@@ -3,47 +3,13 @@
 <mapper namespace="com.taotao.mapper.commonmodule.SysStaffMapper" >
   <resultMap id="BaseResultMap" type="com.taotao.pojo.commonmodule.SysStaff" >
     <id column="STAFF_ID" property="staffId" jdbcType="VARCHAR" />
-    <id column="STAFF_NAME" property="staffName" jdbcType="VARCHAR" />
-    <result column="DEP_ID" property="depId" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
     <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
     <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
-    <result column="VALID" property="valid" jdbcType="CHAR" />
-    <result column="DUTY" property="duty" jdbcType="VARCHAR" />
-    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
-    <result column="FAX" property="fax" jdbcType="VARCHAR" />
-    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
-    <result column="REG_DATE" property="regDate" jdbcType="TIMESTAMP" />
-    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
-    <result column="ORDER_NUMBER" property="orderNumber" jdbcType="INTEGER" />
-    <result column="SYS_TEMPLATE" property="sysTemplate" jdbcType="CHAR" />
-    <result column="MEMBER_ID" property="memberId" jdbcType="VARCHAR" />
-    <result column="SEX" property="sex" jdbcType="VARCHAR" />
-    <result column="IN_DATE" property="inDate" jdbcType="TIMESTAMP" />
-    <result column="EXIT_DATE" property="exitDate" jdbcType="TIMESTAMP" />
-    <result column="ID_NUM" property="idNum" jdbcType="VARCHAR" />
-    <result column="ROOM_NUM" property="roomNum" jdbcType="VARCHAR" />
-    <result column="MOBILE_PHONE" property="mobilePhone" jdbcType="VARCHAR" />
-    <result column="STAFF_TYPE" property="staffType" jdbcType="VARCHAR" />
-    <result column="IS_LOGIN" property="isLogin" jdbcType="VARCHAR" />
-    <result column="POLITICS" property="politics" jdbcType="VARCHAR" />
-    <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
-    <result column="BIRTH" property="birth" jdbcType="TIMESTAMP" />
-    <result column="TREATMENT_LEVEL" property="treatmentLevel" jdbcType="VARCHAR" />
-    <result column="PARTY_DATE" property="partyDate" jdbcType="TIMESTAMP" />
-    <result column="EDIT_DATE" property="editDate" jdbcType="TIMESTAMP" />
-    <result column="REGISTER_DATE" property="registerDate" jdbcType="TIMESTAMP" />
-    <result column="TRY_DATE" property="tryDate" jdbcType="VARCHAR" />
-    <result column="TURN_LEVEL_DATE" property="turnLevelDate" jdbcType="TIMESTAMP" />
-    <result column="TRANSFER_DATE" property="transferDate" jdbcType="TIMESTAMP" />
-    <result column="CURRENT_NUM" property="currentNum" jdbcType="VARCHAR" />
-    <result column="YEARS_GRADE" property="yearsGrade" jdbcType="VARCHAR" />
-    <result column="RETIRE_DATE" property="retireDate" jdbcType="TIMESTAMP" />
-    <result column="RETIRE_DUTY_LEVEL" property="retireDutyLevel" jdbcType="VARCHAR" />
-    <result column="CONTRACT_PERIOD" property="contractPeriod" jdbcType="VARCHAR" />
-    <result column="INSURED" property="insured" jdbcType="VARCHAR" />
-    <result column="HIRE_DUTY" property="hireDuty" jdbcType="VARCHAR" />
-    <result column="HIRE_DATE" property="hireDate" jdbcType="TIMESTAMP" />
-    <result column="CURRENT_DATED" property="currentDated" jdbcType="TIMESTAMP" />
+    <result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+    <result column="ISDEL" property="isdel" jdbcType="INTEGER" />
+    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -104,12 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    STAFF_ID, STAFF_NAME, DEP_ID, LOGIN_NAME, PASSWORD, VALID, DUTY, DESCRIPTION, FAX, 
-    PHONE, REG_DATE, EMAIL, ORDER_NUMBER, SYS_TEMPLATE, MEMBER_ID, SEX, IN_DATE, EXIT_DATE, 
-    ID_NUM, ROOM_NUM, MOBILE_PHONE, STAFF_TYPE, IS_LOGIN, POLITICS, EDUCATION, BIRTH, 
-    TREATMENT_LEVEL, PARTY_DATE, EDIT_DATE, REGISTER_DATE, TRY_DATE, TURN_LEVEL_DATE, 
-    TRANSFER_DATE, CURRENT_NUM, YEARS_GRADE, RETIRE_DATE, RETIRE_DUTY_LEVEL, CONTRACT_PERIOD, 
-    INSURED, HIRE_DUTY, HIRE_DATE, CURRENT_DATED
+    STAFF_ID, ROLE_ID, LOGIN_NAME, PASSWORD, NICKNAME, ISDEL, CREATEDATE, ROLE_NAME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.commonmodule.SysStaffExample" >
     select
@@ -125,17 +86,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.taotao.pojo.commonmodule.SysStaffKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from sys_staff
     where STAFF_ID = #{staffId,jdbcType=VARCHAR}
-      and STAFF_NAME = #{staffName,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.taotao.pojo.commonmodule.SysStaffKey" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_staff
     where STAFF_ID = #{staffId,jdbcType=VARCHAR}
-      and STAFF_NAME = #{staffName,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.taotao.pojo.commonmodule.SysStaffExample" >
     delete from sys_staff
@@ -144,36 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.taotao.pojo.commonmodule.SysStaff" >
-    insert into sys_staff (STAFF_ID, STAFF_NAME, DEP_ID, 
-      LOGIN_NAME, PASSWORD, VALID, 
-      DUTY, DESCRIPTION, FAX, 
-      PHONE, REG_DATE, EMAIL, 
-      ORDER_NUMBER, SYS_TEMPLATE, MEMBER_ID, 
-      SEX, IN_DATE, EXIT_DATE, 
-      ID_NUM, ROOM_NUM, MOBILE_PHONE, 
-      STAFF_TYPE, IS_LOGIN, POLITICS, 
-      EDUCATION, BIRTH, TREATMENT_LEVEL, 
-      PARTY_DATE, EDIT_DATE, REGISTER_DATE, 
-      TRY_DATE, TURN_LEVEL_DATE, TRANSFER_DATE, 
-      CURRENT_NUM, YEARS_GRADE, RETIRE_DATE, 
-      RETIRE_DUTY_LEVEL, CONTRACT_PERIOD, INSURED, 
-      HIRE_DUTY, HIRE_DATE, CURRENT_DATED
-      )
-    values (#{staffId,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, #{depId,jdbcType=VARCHAR}, 
-      #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{valid,jdbcType=CHAR}, 
-      #{duty,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{regDate,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, 
-      #{orderNumber,jdbcType=INTEGER}, #{sysTemplate,jdbcType=CHAR}, #{memberId,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{inDate,jdbcType=TIMESTAMP}, #{exitDate,jdbcType=TIMESTAMP}, 
-      #{idNum,jdbcType=VARCHAR}, #{roomNum,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, 
-      #{staffType,jdbcType=VARCHAR}, #{isLogin,jdbcType=VARCHAR}, #{politics,jdbcType=VARCHAR}, 
-      #{education,jdbcType=VARCHAR}, #{birth,jdbcType=TIMESTAMP}, #{treatmentLevel,jdbcType=VARCHAR}, 
-      #{partyDate,jdbcType=TIMESTAMP}, #{editDate,jdbcType=TIMESTAMP}, #{registerDate,jdbcType=TIMESTAMP}, 
-      #{tryDate,jdbcType=VARCHAR}, #{turnLevelDate,jdbcType=TIMESTAMP}, #{transferDate,jdbcType=TIMESTAMP}, 
-      #{currentNum,jdbcType=VARCHAR}, #{yearsGrade,jdbcType=VARCHAR}, #{retireDate,jdbcType=TIMESTAMP}, 
-      #{retireDutyLevel,jdbcType=VARCHAR}, #{contractPeriod,jdbcType=VARCHAR}, #{insured,jdbcType=VARCHAR}, 
-      #{hireDuty,jdbcType=VARCHAR}, #{hireDate,jdbcType=TIMESTAMP}, #{currentDated,jdbcType=TIMESTAMP}
-      )
+    insert into sys_staff (STAFF_ID, ROLE_ID, LOGIN_NAME, 
+      PASSWORD, NICKNAME, ISDEL, 
+      CREATEDATE, ROLE_NAME)
+    values (#{staffId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{roleName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.taotao.pojo.commonmodule.SysStaff" >
     insert into sys_staff
@@ -181,11 +116,8 @@
       <if test="staffId != null" >
         STAFF_ID,
       </if>
-      <if test="staffName != null" >
-        STAFF_NAME,
-      </if>
-      <if test="depId != null" >
-        DEP_ID,
+      <if test="roleId != null" >
+        ROLE_ID,
       </if>
       <if test="loginName != null" >
         LOGIN_NAME,
@@ -193,127 +125,25 @@
       <if test="password != null" >
         PASSWORD,
       </if>
-      <if test="valid != null" >
-        VALID,
+      <if test="nickname != null" >
+        NICKNAME,
       </if>
-      <if test="duty != null" >
-        DUTY,
+      <if test="isdel != null" >
+        ISDEL,
       </if>
-      <if test="description != null" >
-        DESCRIPTION,
+      <if test="createdate != null" >
+        CREATEDATE,
       </if>
-      <if test="fax != null" >
-        FAX,
-      </if>
-      <if test="phone != null" >
-        PHONE,
-      </if>
-      <if test="regDate != null" >
-        REG_DATE,
-      </if>
-      <if test="email != null" >
-        EMAIL,
-      </if>
-      <if test="orderNumber != null" >
-        ORDER_NUMBER,
-      </if>
-      <if test="sysTemplate != null" >
-        SYS_TEMPLATE,
-      </if>
-      <if test="memberId != null" >
-        MEMBER_ID,
-      </if>
-      <if test="sex != null" >
-        SEX,
-      </if>
-      <if test="inDate != null" >
-        IN_DATE,
-      </if>
-      <if test="exitDate != null" >
-        EXIT_DATE,
-      </if>
-      <if test="idNum != null" >
-        ID_NUM,
-      </if>
-      <if test="roomNum != null" >
-        ROOM_NUM,
-      </if>
-      <if test="mobilePhone != null" >
-        MOBILE_PHONE,
-      </if>
-      <if test="staffType != null" >
-        STAFF_TYPE,
-      </if>
-      <if test="isLogin != null" >
-        IS_LOGIN,
-      </if>
-      <if test="politics != null" >
-        POLITICS,
-      </if>
-      <if test="education != null" >
-        EDUCATION,
-      </if>
-      <if test="birth != null" >
-        BIRTH,
-      </if>
-      <if test="treatmentLevel != null" >
-        TREATMENT_LEVEL,
-      </if>
-      <if test="partyDate != null" >
-        PARTY_DATE,
-      </if>
-      <if test="editDate != null" >
-        EDIT_DATE,
-      </if>
-      <if test="registerDate != null" >
-        REGISTER_DATE,
-      </if>
-      <if test="tryDate != null" >
-        TRY_DATE,
-      </if>
-      <if test="turnLevelDate != null" >
-        TURN_LEVEL_DATE,
-      </if>
-      <if test="transferDate != null" >
-        TRANSFER_DATE,
-      </if>
-      <if test="currentNum != null" >
-        CURRENT_NUM,
-      </if>
-      <if test="yearsGrade != null" >
-        YEARS_GRADE,
-      </if>
-      <if test="retireDate != null" >
-        RETIRE_DATE,
-      </if>
-      <if test="retireDutyLevel != null" >
-        RETIRE_DUTY_LEVEL,
-      </if>
-      <if test="contractPeriod != null" >
-        CONTRACT_PERIOD,
-      </if>
-      <if test="insured != null" >
-        INSURED,
-      </if>
-      <if test="hireDuty != null" >
-        HIRE_DUTY,
-      </if>
-      <if test="hireDate != null" >
-        HIRE_DATE,
-      </if>
-      <if test="currentDated != null" >
-        CURRENT_DATED,
+      <if test="roleName != null" >
+        ROLE_NAME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="staffId != null" >
         #{staffId,jdbcType=VARCHAR},
       </if>
-      <if test="staffName != null" >
-        #{staffName,jdbcType=VARCHAR},
-      </if>
-      <if test="depId != null" >
-        #{depId,jdbcType=VARCHAR},
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="loginName != null" >
         #{loginName,jdbcType=VARCHAR},
@@ -321,116 +151,17 @@
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="valid != null" >
-        #{valid,jdbcType=CHAR},
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="duty != null" >
-        #{duty,jdbcType=VARCHAR},
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
       </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="fax != null" >
-        #{fax,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="regDate != null" >
-        #{regDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNumber != null" >
-        #{orderNumber,jdbcType=INTEGER},
-      </if>
-      <if test="sysTemplate != null" >
-        #{sysTemplate,jdbcType=CHAR},
-      </if>
-      <if test="memberId != null" >
-        #{memberId,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="inDate != null" >
-        #{inDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="exitDate != null" >
-        #{exitDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="idNum != null" >
-        #{idNum,jdbcType=VARCHAR},
-      </if>
-      <if test="roomNum != null" >
-        #{roomNum,jdbcType=VARCHAR},
-      </if>
-      <if test="mobilePhone != null" >
-        #{mobilePhone,jdbcType=VARCHAR},
-      </if>
-      <if test="staffType != null" >
-        #{staffType,jdbcType=VARCHAR},
-      </if>
-      <if test="isLogin != null" >
-        #{isLogin,jdbcType=VARCHAR},
-      </if>
-      <if test="politics != null" >
-        #{politics,jdbcType=VARCHAR},
-      </if>
-      <if test="education != null" >
-        #{education,jdbcType=VARCHAR},
-      </if>
-      <if test="birth != null" >
-        #{birth,jdbcType=TIMESTAMP},
-      </if>
-      <if test="treatmentLevel != null" >
-        #{treatmentLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="partyDate != null" >
-        #{partyDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="editDate != null" >
-        #{editDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="registerDate != null" >
-        #{registerDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="tryDate != null" >
-        #{tryDate,jdbcType=VARCHAR},
-      </if>
-      <if test="turnLevelDate != null" >
-        #{turnLevelDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="transferDate != null" >
-        #{transferDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="currentNum != null" >
-        #{currentNum,jdbcType=VARCHAR},
-      </if>
-      <if test="yearsGrade != null" >
-        #{yearsGrade,jdbcType=VARCHAR},
-      </if>
-      <if test="retireDate != null" >
-        #{retireDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="retireDutyLevel != null" >
-        #{retireDutyLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="contractPeriod != null" >
-        #{contractPeriod,jdbcType=VARCHAR},
-      </if>
-      <if test="insured != null" >
-        #{insured,jdbcType=VARCHAR},
-      </if>
-      <if test="hireDuty != null" >
-        #{hireDuty,jdbcType=VARCHAR},
-      </if>
-      <if test="hireDate != null" >
-        #{hireDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="currentDated != null" >
-        #{currentDated,jdbcType=TIMESTAMP},
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -446,11 +177,8 @@
       <if test="record.staffId != null" >
         STAFF_ID = #{record.staffId,jdbcType=VARCHAR},
       </if>
-      <if test="record.staffName != null" >
-        STAFF_NAME = #{record.staffName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.depId != null" >
-        DEP_ID = #{record.depId,jdbcType=VARCHAR},
+      <if test="record.roleId != null" >
+        ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
       </if>
       <if test="record.loginName != null" >
         LOGIN_NAME = #{record.loginName,jdbcType=VARCHAR},
@@ -458,116 +186,17 @@
       <if test="record.password != null" >
         PASSWORD = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.valid != null" >
-        VALID = #{record.valid,jdbcType=CHAR},
+      <if test="record.nickname != null" >
+        NICKNAME = #{record.nickname,jdbcType=VARCHAR},
       </if>
-      <if test="record.duty != null" >
-        DUTY = #{record.duty,jdbcType=VARCHAR},
+      <if test="record.isdel != null" >
+        ISDEL = #{record.isdel,jdbcType=INTEGER},
       </if>
-      <if test="record.description != null" >
-        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      <if test="record.createdate != null" >
+        CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.fax != null" >
-        FAX = #{record.fax,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone != null" >
-        PHONE = #{record.phone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.regDate != null" >
-        REG_DATE = #{record.regDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.email != null" >
-        EMAIL = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.orderNumber != null" >
-        ORDER_NUMBER = #{record.orderNumber,jdbcType=INTEGER},
-      </if>
-      <if test="record.sysTemplate != null" >
-        SYS_TEMPLATE = #{record.sysTemplate,jdbcType=CHAR},
-      </if>
-      <if test="record.memberId != null" >
-        MEMBER_ID = #{record.memberId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null" >
-        SEX = #{record.sex,jdbcType=VARCHAR},
-      </if>
-      <if test="record.inDate != null" >
-        IN_DATE = #{record.inDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.exitDate != null" >
-        EXIT_DATE = #{record.exitDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.idNum != null" >
-        ID_NUM = #{record.idNum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.roomNum != null" >
-        ROOM_NUM = #{record.roomNum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.mobilePhone != null" >
-        MOBILE_PHONE = #{record.mobilePhone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.staffType != null" >
-        STAFF_TYPE = #{record.staffType,jdbcType=VARCHAR},
-      </if>
-      <if test="record.isLogin != null" >
-        IS_LOGIN = #{record.isLogin,jdbcType=VARCHAR},
-      </if>
-      <if test="record.politics != null" >
-        POLITICS = #{record.politics,jdbcType=VARCHAR},
-      </if>
-      <if test="record.education != null" >
-        EDUCATION = #{record.education,jdbcType=VARCHAR},
-      </if>
-      <if test="record.birth != null" >
-        BIRTH = #{record.birth,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.treatmentLevel != null" >
-        TREATMENT_LEVEL = #{record.treatmentLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="record.partyDate != null" >
-        PARTY_DATE = #{record.partyDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.editDate != null" >
-        EDIT_DATE = #{record.editDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.registerDate != null" >
-        REGISTER_DATE = #{record.registerDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.tryDate != null" >
-        TRY_DATE = #{record.tryDate,jdbcType=VARCHAR},
-      </if>
-      <if test="record.turnLevelDate != null" >
-        TURN_LEVEL_DATE = #{record.turnLevelDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.transferDate != null" >
-        TRANSFER_DATE = #{record.transferDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.currentNum != null" >
-        CURRENT_NUM = #{record.currentNum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.yearsGrade != null" >
-        YEARS_GRADE = #{record.yearsGrade,jdbcType=VARCHAR},
-      </if>
-      <if test="record.retireDate != null" >
-        RETIRE_DATE = #{record.retireDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.retireDutyLevel != null" >
-        RETIRE_DUTY_LEVEL = #{record.retireDutyLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="record.contractPeriod != null" >
-        CONTRACT_PERIOD = #{record.contractPeriod,jdbcType=VARCHAR},
-      </if>
-      <if test="record.insured != null" >
-        INSURED = #{record.insured,jdbcType=VARCHAR},
-      </if>
-      <if test="record.hireDuty != null" >
-        HIRE_DUTY = #{record.hireDuty,jdbcType=VARCHAR},
-      </if>
-      <if test="record.hireDate != null" >
-        HIRE_DATE = #{record.hireDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.currentDated != null" >
-        CURRENT_DATED = #{record.currentDated,jdbcType=TIMESTAMP},
+      <if test="record.roleName != null" >
+        ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -577,47 +206,13 @@
   <update id="updateByExample" parameterType="map" >
     update sys_staff
     set STAFF_ID = #{record.staffId,jdbcType=VARCHAR},
-      STAFF_NAME = #{record.staffName,jdbcType=VARCHAR},
-      DEP_ID = #{record.depId,jdbcType=VARCHAR},
+      ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
       LOGIN_NAME = #{record.loginName,jdbcType=VARCHAR},
       PASSWORD = #{record.password,jdbcType=VARCHAR},
-      VALID = #{record.valid,jdbcType=CHAR},
-      DUTY = #{record.duty,jdbcType=VARCHAR},
-      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
-      FAX = #{record.fax,jdbcType=VARCHAR},
-      PHONE = #{record.phone,jdbcType=VARCHAR},
-      REG_DATE = #{record.regDate,jdbcType=TIMESTAMP},
-      EMAIL = #{record.email,jdbcType=VARCHAR},
-      ORDER_NUMBER = #{record.orderNumber,jdbcType=INTEGER},
-      SYS_TEMPLATE = #{record.sysTemplate,jdbcType=CHAR},
-      MEMBER_ID = #{record.memberId,jdbcType=VARCHAR},
-      SEX = #{record.sex,jdbcType=VARCHAR},
-      IN_DATE = #{record.inDate,jdbcType=TIMESTAMP},
-      EXIT_DATE = #{record.exitDate,jdbcType=TIMESTAMP},
-      ID_NUM = #{record.idNum,jdbcType=VARCHAR},
-      ROOM_NUM = #{record.roomNum,jdbcType=VARCHAR},
-      MOBILE_PHONE = #{record.mobilePhone,jdbcType=VARCHAR},
-      STAFF_TYPE = #{record.staffType,jdbcType=VARCHAR},
-      IS_LOGIN = #{record.isLogin,jdbcType=VARCHAR},
-      POLITICS = #{record.politics,jdbcType=VARCHAR},
-      EDUCATION = #{record.education,jdbcType=VARCHAR},
-      BIRTH = #{record.birth,jdbcType=TIMESTAMP},
-      TREATMENT_LEVEL = #{record.treatmentLevel,jdbcType=VARCHAR},
-      PARTY_DATE = #{record.partyDate,jdbcType=TIMESTAMP},
-      EDIT_DATE = #{record.editDate,jdbcType=TIMESTAMP},
-      REGISTER_DATE = #{record.registerDate,jdbcType=TIMESTAMP},
-      TRY_DATE = #{record.tryDate,jdbcType=VARCHAR},
-      TURN_LEVEL_DATE = #{record.turnLevelDate,jdbcType=TIMESTAMP},
-      TRANSFER_DATE = #{record.transferDate,jdbcType=TIMESTAMP},
-      CURRENT_NUM = #{record.currentNum,jdbcType=VARCHAR},
-      YEARS_GRADE = #{record.yearsGrade,jdbcType=VARCHAR},
-      RETIRE_DATE = #{record.retireDate,jdbcType=TIMESTAMP},
-      RETIRE_DUTY_LEVEL = #{record.retireDutyLevel,jdbcType=VARCHAR},
-      CONTRACT_PERIOD = #{record.contractPeriod,jdbcType=VARCHAR},
-      INSURED = #{record.insured,jdbcType=VARCHAR},
-      HIRE_DUTY = #{record.hireDuty,jdbcType=VARCHAR},
-      HIRE_DATE = #{record.hireDate,jdbcType=TIMESTAMP},
-      CURRENT_DATED = #{record.currentDated,jdbcType=TIMESTAMP}
+      NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      ISDEL = #{record.isdel,jdbcType=INTEGER},
+      CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      ROLE_NAME = #{record.roleName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -625,8 +220,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.taotao.pojo.commonmodule.SysStaff" >
     update sys_staff
     <set >
-      <if test="depId != null" >
-        DEP_ID = #{depId,jdbcType=VARCHAR},
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="loginName != null" >
         LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
@@ -634,164 +229,30 @@
       <if test="password != null" >
         PASSWORD = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="valid != null" >
-        VALID = #{valid,jdbcType=CHAR},
+      <if test="nickname != null" >
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="duty != null" >
-        DUTY = #{duty,jdbcType=VARCHAR},
+      <if test="isdel != null" >
+        ISDEL = #{isdel,jdbcType=INTEGER},
       </if>
-      <if test="description != null" >
-        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="fax != null" >
-        FAX = #{fax,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        PHONE = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="regDate != null" >
-        REG_DATE = #{regDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="email != null" >
-        EMAIL = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNumber != null" >
-        ORDER_NUMBER = #{orderNumber,jdbcType=INTEGER},
-      </if>
-      <if test="sysTemplate != null" >
-        SYS_TEMPLATE = #{sysTemplate,jdbcType=CHAR},
-      </if>
-      <if test="memberId != null" >
-        MEMBER_ID = #{memberId,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        SEX = #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="inDate != null" >
-        IN_DATE = #{inDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="exitDate != null" >
-        EXIT_DATE = #{exitDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="idNum != null" >
-        ID_NUM = #{idNum,jdbcType=VARCHAR},
-      </if>
-      <if test="roomNum != null" >
-        ROOM_NUM = #{roomNum,jdbcType=VARCHAR},
-      </if>
-      <if test="mobilePhone != null" >
-        MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
-      </if>
-      <if test="staffType != null" >
-        STAFF_TYPE = #{staffType,jdbcType=VARCHAR},
-      </if>
-      <if test="isLogin != null" >
-        IS_LOGIN = #{isLogin,jdbcType=VARCHAR},
-      </if>
-      <if test="politics != null" >
-        POLITICS = #{politics,jdbcType=VARCHAR},
-      </if>
-      <if test="education != null" >
-        EDUCATION = #{education,jdbcType=VARCHAR},
-      </if>
-      <if test="birth != null" >
-        BIRTH = #{birth,jdbcType=TIMESTAMP},
-      </if>
-      <if test="treatmentLevel != null" >
-        TREATMENT_LEVEL = #{treatmentLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="partyDate != null" >
-        PARTY_DATE = #{partyDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="editDate != null" >
-        EDIT_DATE = #{editDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="registerDate != null" >
-        REGISTER_DATE = #{registerDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="tryDate != null" >
-        TRY_DATE = #{tryDate,jdbcType=VARCHAR},
-      </if>
-      <if test="turnLevelDate != null" >
-        TURN_LEVEL_DATE = #{turnLevelDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="transferDate != null" >
-        TRANSFER_DATE = #{transferDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="currentNum != null" >
-        CURRENT_NUM = #{currentNum,jdbcType=VARCHAR},
-      </if>
-      <if test="yearsGrade != null" >
-        YEARS_GRADE = #{yearsGrade,jdbcType=VARCHAR},
-      </if>
-      <if test="retireDate != null" >
-        RETIRE_DATE = #{retireDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="retireDutyLevel != null" >
-        RETIRE_DUTY_LEVEL = #{retireDutyLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="contractPeriod != null" >
-        CONTRACT_PERIOD = #{contractPeriod,jdbcType=VARCHAR},
-      </if>
-      <if test="insured != null" >
-        INSURED = #{insured,jdbcType=VARCHAR},
-      </if>
-      <if test="hireDuty != null" >
-        HIRE_DUTY = #{hireDuty,jdbcType=VARCHAR},
-      </if>
-      <if test="hireDate != null" >
-        HIRE_DATE = #{hireDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="currentDated != null" >
-        CURRENT_DATED = #{currentDated,jdbcType=TIMESTAMP},
+      <if test="roleName != null" >
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
       </if>
     </set>
     where STAFF_ID = #{staffId,jdbcType=VARCHAR}
-      and STAFF_NAME = #{staffName,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.taotao.pojo.commonmodule.SysStaff" >
     update sys_staff
-    set DEP_ID = #{depId,jdbcType=VARCHAR},
+    set ROLE_ID = #{roleId,jdbcType=VARCHAR},
       LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
-      VALID = #{valid,jdbcType=CHAR},
-      DUTY = #{duty,jdbcType=VARCHAR},
-      DESCRIPTION = #{description,jdbcType=VARCHAR},
-      FAX = #{fax,jdbcType=VARCHAR},
-      PHONE = #{phone,jdbcType=VARCHAR},
-      REG_DATE = #{regDate,jdbcType=TIMESTAMP},
-      EMAIL = #{email,jdbcType=VARCHAR},
-      ORDER_NUMBER = #{orderNumber,jdbcType=INTEGER},
-      SYS_TEMPLATE = #{sysTemplate,jdbcType=CHAR},
-      MEMBER_ID = #{memberId,jdbcType=VARCHAR},
-      SEX = #{sex,jdbcType=VARCHAR},
-      IN_DATE = #{inDate,jdbcType=TIMESTAMP},
-      EXIT_DATE = #{exitDate,jdbcType=TIMESTAMP},
-      ID_NUM = #{idNum,jdbcType=VARCHAR},
-      ROOM_NUM = #{roomNum,jdbcType=VARCHAR},
-      MOBILE_PHONE = #{mobilePhone,jdbcType=VARCHAR},
-      STAFF_TYPE = #{staffType,jdbcType=VARCHAR},
-      IS_LOGIN = #{isLogin,jdbcType=VARCHAR},
-      POLITICS = #{politics,jdbcType=VARCHAR},
-      EDUCATION = #{education,jdbcType=VARCHAR},
-      BIRTH = #{birth,jdbcType=TIMESTAMP},
-      TREATMENT_LEVEL = #{treatmentLevel,jdbcType=VARCHAR},
-      PARTY_DATE = #{partyDate,jdbcType=TIMESTAMP},
-      EDIT_DATE = #{editDate,jdbcType=TIMESTAMP},
-      REGISTER_DATE = #{registerDate,jdbcType=TIMESTAMP},
-      TRY_DATE = #{tryDate,jdbcType=VARCHAR},
-      TURN_LEVEL_DATE = #{turnLevelDate,jdbcType=TIMESTAMP},
-      TRANSFER_DATE = #{transferDate,jdbcType=TIMESTAMP},
-      CURRENT_NUM = #{currentNum,jdbcType=VARCHAR},
-      YEARS_GRADE = #{yearsGrade,jdbcType=VARCHAR},
-      RETIRE_DATE = #{retireDate,jdbcType=TIMESTAMP},
-      RETIRE_DUTY_LEVEL = #{retireDutyLevel,jdbcType=VARCHAR},
-      CONTRACT_PERIOD = #{contractPeriod,jdbcType=VARCHAR},
-      INSURED = #{insured,jdbcType=VARCHAR},
-      HIRE_DUTY = #{hireDuty,jdbcType=VARCHAR},
-      HIRE_DATE = #{hireDate,jdbcType=TIMESTAMP},
-      CURRENT_DATED = #{currentDated,jdbcType=TIMESTAMP}
+      NICKNAME = #{nickname,jdbcType=VARCHAR},
+      ISDEL = #{isdel,jdbcType=INTEGER},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      ROLE_NAME = #{roleName,jdbcType=VARCHAR}
     where STAFF_ID = #{staffId,jdbcType=VARCHAR}
-      and STAFF_NAME = #{staffName,jdbcType=VARCHAR}
   </update>
 </mapper>

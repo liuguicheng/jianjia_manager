@@ -443,6 +443,76 @@ public class SysRoleExample {
             addCriterion("sort_order not between", value1, value2, "sortOrder");
             return (Criteria) this;
         }
+
+        public Criteria andPowerstrIsNull() {
+            addCriterion("powerStr is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrIsNotNull() {
+            addCriterion("powerStr is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrEqualTo(String value) {
+            addCriterion("powerStr =", value, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrNotEqualTo(String value) {
+            addCriterion("powerStr <>", value, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrGreaterThan(String value) {
+            addCriterion("powerStr >", value, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrGreaterThanOrEqualTo(String value) {
+            addCriterion("powerStr >=", value, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrLessThan(String value) {
+            addCriterion("powerStr <", value, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrLessThanOrEqualTo(String value) {
+            addCriterion("powerStr <=", value, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrLike(String value) {
+            addCriterion("powerStr like", value, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrNotLike(String value) {
+            addCriterion("powerStr not like", value, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrIn(List<String> values) {
+            addCriterion("powerStr in", values, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrNotIn(List<String> values) {
+            addCriterion("powerStr not in", values, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrBetween(String value1, String value2) {
+            addCriterion("powerStr between", value1, value2, "powerstr");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerstrNotBetween(String value1, String value2) {
+            addCriterion("powerStr not between", value1, value2, "powerstr");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

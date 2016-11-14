@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.taotao.common.pojo.EUDataGridResult;
 import com.taotao.common.pojo.EUTreeNode;
+import com.taotao.common.pojo.EUTreeNode2;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.commonmodule.SysPower;
 
@@ -11,7 +12,7 @@ public interface PowerService {
 
 	EUDataGridResult getPowerList(int page, int rows);
 
-	List<EUTreeNode> getPowerJsonList(String powerParentId);
+	List<EUTreeNode2> getPowerJsonList(String powerParentId);
 
 	TaotaoResult insertPower(SysPower sysPower);
 

@@ -18,13 +18,22 @@ public class PageController {
 		return "console/main/index";
 	}
 	
-	/**
-	 * 展示其他页面 JSP目录下
-	 */
 	@RequestMapping("/{page}")
 	public String showpage(@PathVariable String page) {
-		return page;
+		return "console/main/" + page;
 	}
+	
+	@RequestMapping("/login")
+	public String Login() {
+		return "console/main/login";
+	}
+
+	@RequestMapping("/logout")
+	public String Logout() {
+		return "console/main/login";
+	}
+	
+	
 	/**
 	 * 展示其他页面 console目录下
 	 */

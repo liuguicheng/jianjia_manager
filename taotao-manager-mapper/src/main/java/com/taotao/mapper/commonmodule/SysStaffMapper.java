@@ -2,7 +2,6 @@ package com.taotao.mapper.commonmodule;
 
 import com.taotao.pojo.commonmodule.SysStaff;
 import com.taotao.pojo.commonmodule.SysStaffExample;
-import com.taotao.pojo.commonmodule.SysStaffKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +10,7 @@ public interface SysStaffMapper {
 
     int deleteByExample(SysStaffExample example);
 
-    int deleteByPrimaryKey(SysStaffKey key);
+    int deleteByPrimaryKey(String staffId);
 
     int insert(SysStaff record);
 
@@ -19,7 +18,7 @@ public interface SysStaffMapper {
 
     List<SysStaff> selectByExample(SysStaffExample example);
 
-    SysStaff selectByPrimaryKey(SysStaffKey key);
+    SysStaff selectByPrimaryKey(String staffId);
 
     int updateByExampleSelective(@Param("record") SysStaff record, @Param("example") SysStaffExample example);
 

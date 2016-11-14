@@ -7,6 +7,7 @@
     <result column="DEFAULT_HOME_URL" property="defaultHomeUrl" jdbcType="VARCHAR" />
     <result column="REMARK" property="remark" jdbcType="VARCHAR" />
     <result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
+    <result column="powerStr" property="powerstr" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ROLE_ID, ROLE_NAME, DEFAULT_HOME_URL, REMARK, sort_order
+    ROLE_ID, ROLE_NAME, DEFAULT_HOME_URL, REMARK, sort_order, powerStr
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.commonmodule.SysRoleExample" >
     select
@@ -101,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.taotao.pojo.commonmodule.SysRole" >
     insert into sys_role (ROLE_ID, ROLE_NAME, DEFAULT_HOME_URL, 
-      REMARK, sort_order)
+      REMARK, sort_order, powerStr
+      )
     values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{defaultHomeUrl,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{sortOrder,jdbcType=INTEGER})
+      #{remark,jdbcType=VARCHAR}, #{sortOrder,jdbcType=INTEGER}, #{powerstr,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.taotao.pojo.commonmodule.SysRole" >
     insert into sys_role
@@ -123,6 +126,9 @@
       <if test="sortOrder != null" >
         sort_order,
       </if>
+      <if test="powerstr != null" >
+        powerStr,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="roleId != null" >
@@ -139,6 +145,9 @@
       </if>
       <if test="sortOrder != null" >
         #{sortOrder,jdbcType=INTEGER},
+      </if>
+      <if test="powerstr != null" >
+        #{powerstr,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +175,9 @@
       <if test="record.sortOrder != null" >
         sort_order = #{record.sortOrder,jdbcType=INTEGER},
       </if>
+      <if test="record.powerstr != null" >
+        powerStr = #{record.powerstr,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +189,8 @@
       ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
       DEFAULT_HOME_URL = #{record.defaultHomeUrl,jdbcType=VARCHAR},
       REMARK = #{record.remark,jdbcType=VARCHAR},
-      sort_order = #{record.sortOrder,jdbcType=INTEGER}
+      sort_order = #{record.sortOrder,jdbcType=INTEGER},
+      powerStr = #{record.powerstr,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +210,9 @@
       <if test="sortOrder != null" >
         sort_order = #{sortOrder,jdbcType=INTEGER},
       </if>
+      <if test="powerstr != null" >
+        powerStr = #{powerstr,jdbcType=VARCHAR},
+      </if>
     </set>
     where ROLE_ID = #{roleId,jdbcType=VARCHAR}
   </update>
@@ -205,7 +221,8 @@
     set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
       DEFAULT_HOME_URL = #{defaultHomeUrl,jdbcType=VARCHAR},
       REMARK = #{remark,jdbcType=VARCHAR},
-      sort_order = #{sortOrder,jdbcType=INTEGER}
+      sort_order = #{sortOrder,jdbcType=INTEGER},
+      powerStr = #{powerstr,jdbcType=VARCHAR}
     where ROLE_ID = #{roleId,jdbcType=VARCHAR}
   </update>
 </mapper>
