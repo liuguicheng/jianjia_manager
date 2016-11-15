@@ -11,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EUDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.mapper.TbItemParamMapper;
+import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemParam;
 import com.taotao.pojo.TbItemParamExample;
 import com.taotao.pojo.TbItemParamExample.Criteria;
@@ -20,12 +21,6 @@ import com.taotao.service.ItemParamService;
 
 /**
  * 商品规格参数模板管理
- * <p>Title: ItemParamServiceImpl</p>
- * <p>Description: </p>
- * <p>Company: www.itcast.com</p> 
- * @author	入云龙
- * @date	2015年9月5日下午2:36:57
- * @version 1.0
  */
 @Service
 public class ItemParamServiceImpl implements ItemParamService {
@@ -70,6 +65,42 @@ public class ItemParamServiceImpl implements ItemParamService {
 		PageInfo<TbItemParam> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
+	}
+
+	@Override
+	public TaotaoResult deleteItemParam(String ids) {
+		try {
+			if(ids!=null&&!"".equals(ids)){
+				String[] idStrings=ids.split(",");
+				for (String string : idStrings) {
+					itemParamMapper.deleteByPrimaryKey(Long.valueOf(string));
+				}
+			}
+			return TaotaoResult.ok(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new TaotaoResult(500,"删除异常",null);
+	}
+
+	@Override
+	public TbItemParam selectItemParamById(Long itemId) {
+		return itemParamMapper.selectByPrimaryKey(itemId);
+	}
+
+	@Override
+	public TaotaoResult updateItemParam(TbItemParam itemParam) {
+		try {
+			TbItemParam itemParam2=	selectItemParamById(itemParam.getId());
+			itemParam2.setItemCatId(itemParam.getItemCatId());
+			itemParam2.setParamData(itemParam.getParamData());
+			itemParam2.setUpdated(new Date());
+			itemParamMapper.updateByPrimaryKeySelective(itemParam2);
+			return TaotaoResult.ok(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new TaotaoResult(500,"更新异常",null);
 	}
 
 }

@@ -48,4 +48,31 @@ public class ItemController {
 		TaotaoResult result = itemService.createItem(item, desc, itemParams);
 		return result;
 	}
+	@RequestMapping(value="/item/update", method=RequestMethod.POST)
+	@ResponseBody
+	private TaotaoResult updateItem(TbItem item, String desc, String itemParams) throws Exception {
+		TaotaoResult result = itemService.updateItem(item, desc, itemParams);
+		return result;
+	}
+	
+	@RequestMapping("/item/delete")
+	@ResponseBody
+	public TaotaoResult insertItem(String ids) {
+		TaotaoResult result = itemService.deleteItem(ids);
+		return result;
+	}
+	
+	@RequestMapping("/item/reshelf")
+	@ResponseBody
+	public TaotaoResult updateReshelfItem(String ids) {
+		TaotaoResult result = itemService.updateReshelfItem(ids);
+		return result;
+	}
+	@RequestMapping("/item/instock")
+	@ResponseBody
+	public TaotaoResult updateinstockItem(String ids) {
+		TaotaoResult result = itemService.updateinstockItem(ids);
+		return result;
+	}
+	
 }

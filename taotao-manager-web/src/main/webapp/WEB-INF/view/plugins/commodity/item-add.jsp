@@ -1,12 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="/css/taotao.css" />
-<link href="/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.1/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.1/themes/icon.css" />
-<script type="text/javascript" src="/js/jquery-easyui-1.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="/js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
@@ -15,7 +7,7 @@
 	        <tr>
 	            <td>商品类目:</td>
 	            <td>
-	            	<a href="javascript:void(0)" class="easyui-linkbutton selectItemCat">选择类目</a>
+	            	<a href="javascript:void(0)" class="easyui-linkbutton selectItemCat ">选择类目</a>
 	            	<input type="hidden" name="cid" style="width: 280px;"></input>
 	            </td>
 	        </tr>
@@ -121,6 +113,11 @@
 		$.post("/item/save.do",$("#itemAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增商品成功!');
+				 setTimeout(function () { 
+						$(".panel-tool-close").click();
+						$("#itemList").datagrid("reload");
+				    }, 500);
+			
 			}
 		});
 	}
