@@ -3,6 +3,7 @@ package com.taotao.service;
 import com.taotao.common.pojo.EUDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbItemDesc;
 
 public interface ItemService {
 
@@ -13,4 +14,5 @@ public interface ItemService {
 	TaotaoResult updateReshelfItem(String ids);
 	TaotaoResult updateinstockItem(String ids);
 	TaotaoResult updateItem(TbItem item, String desc, String itemParams)throws Exception;
+	TaotaoResult selectItemDescByItemId(Long itemId);
 }

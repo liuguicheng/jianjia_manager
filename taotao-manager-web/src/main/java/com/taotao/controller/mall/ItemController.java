@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.taotao.common.pojo.EUDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbItemDesc;
 import com.taotao.service.ItemService;
 
 /**
@@ -68,10 +69,22 @@ public class ItemController {
 		TaotaoResult result = itemService.updateReshelfItem(ids);
 		return result;
 	}
+	
 	@RequestMapping("/item/instock")
 	@ResponseBody
 	public TaotaoResult updateinstockItem(String ids) {
 		TaotaoResult result = itemService.updateinstockItem(ids);
+		return result;
+	}
+	
+	
+	/**
+	 * 查询商品描述
+	 */
+	@RequestMapping("/item/desc/{itemId}")
+	@ResponseBody
+	public TaotaoResult getItemDescById(@PathVariable Long itemId) {
+		TaotaoResult result = itemService.selectItemDescByItemId(itemId);
 		return result;
 	}
 	

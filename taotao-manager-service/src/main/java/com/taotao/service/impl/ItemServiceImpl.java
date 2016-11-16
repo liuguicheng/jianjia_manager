@@ -268,7 +268,7 @@ public class ItemServiceImpl implements ItemService {
 			itemParamItem.setParamData(itemParams);
 			itemParamItem.setUpdated(new Date());
 			// 向表中插入数据
-			itemParamItemMapper.updateByPrimaryKey(itemParamItem);
+			itemParamItemMapper.updateByPrimaryKeyWithBLOBs(itemParamItem);
 		}
 		return TaotaoResult.ok();
 	}
@@ -284,9 +284,25 @@ public class ItemServiceImpl implements ItemService {
 			itemdesc.setItemDesc(desc);
 			itemdesc.setUpdated(new Date());
 			// 向表中插入数据
-			itemDescMapper.updateByPrimaryKey(itemdesc);
+			itemDescMapper.updateByPrimaryKeyWithBLOBs(itemdesc);
 		}
 		return TaotaoResult.ok();
+	}
+
+	@Override
+	public TaotaoResult selectItemDescByItemId(Long itemId) {
+		try {
+			TbItemDescExample example = new TbItemDescExample();
+			com.taotao.pojo.TbItemDescExample.Criteria criteria = example.createCriteria();
+			criteria.andItemIdEqualTo(itemId);
+			List<TbItemDesc> itemDescs = itemDescMapper.selectByExampleWithBLOBs(example);
+			if (itemDescs != null && !itemDescs.isEmpty()) {
+				return TaotaoResult.ok(itemDescs.get(0));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new TaotaoResult(500, "查询商品描述异常", null);
 	}
 
 }

@@ -8,10 +8,14 @@
 <div class="easyui-panel" title="Nested Panel" data-options="width:'100%',minHeight:500,noheader:true,border:false" style="padding:10px;">
     <div class="easyui-layout" data-options="fit:true">
         <div data-options="region:'west',split:false" style="width:250px;padding:5px">
+        <h3>内容分类</h3>
+        <hr/>
             <ul id="contentCategoryTree" class="easyui-tree" data-options="url:'/content/category/list.do',animate: true,method : 'GET'">
             </ul>
         </div>
         <div data-options="region:'center'" style="padding:5px">
+        <h3>内容详细</h3>
+         <hr/>
             <table class="easyui-datagrid" id="contentList" data-options="toolbar:contentListToolbar,singleSelect:false,collapsible:true,pagination:true,method:'get',pageSize:20,url:'/content/query/list.do',queryParams:{categoryId:0}">
 		    <thead>
 		        <tr>
@@ -54,7 +58,7 @@ var contentListToolbar = [{
     		return ;
     	}
     	TT.createWindow({
-			url : "content/content-add.do"
+			url : "/plugins/content/content-add.do"
 		}); 
     }
 },{
@@ -71,7 +75,7 @@ var contentListToolbar = [{
     		return ;
     	}
 		TT.createWindow({
-			url : "content/content-edit.do",
+			url : "/plugins/content/content-edit.do",
 			onLoad : function(){
 				var data = $("#contentList").datagrid("getSelections")[0];
 				$("#contentEditForm").form("load",data);
@@ -94,17 +98,19 @@ var contentListToolbar = [{
     handler:function(){
     	var ids = TT.getSelectionsIds("#contentList");
     	if(ids.length == 0){
-    		$.messager.alert('提示','未选中商品!');
+    		$.messager.alert('提示','未选中需删除的内容!');
     		return ;
     	}
     	$.messager.confirm('确认','确定删除ID为 '+ids+' 的内容吗？',function(r){
     	    if (r){
     	    	var params = {"ids":ids};
-            	$.post("/content/delete.do",params, function(data){
+            	$.post("/content/content/delete.do",params, function(data){
         			if(data.status == 200){
         				$.messager.alert('提示','删除内容成功!',undefined,function(){
         					$("#contentList").datagrid("reload");
         				});
+        			}else{
+        				alert(data.status);
         			}
         		});
     	    }

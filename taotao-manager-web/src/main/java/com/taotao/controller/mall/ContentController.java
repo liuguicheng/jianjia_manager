@@ -3,6 +3,7 @@ package com.taotao.controller.mall;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taotao.common.pojo.EUDataGridResult;
@@ -46,9 +47,17 @@ public class ContentController {
 		return easyUIResult;
 	}
 	
-	@RequestMapping("/delete")
-	public @ResponseBody TaotaoResult saveContent(Long ids) {
+	@RequestMapping(value="/content/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public TaotaoResult deleteContent(String ids) {
 		TaotaoResult result = contentService.deleteByContentId(ids);
 		return result;
 	}
+	@RequestMapping(value="/content/edit", method=RequestMethod.POST)
+	@ResponseBody
+	public TaotaoResult editContent(TbContent content) {
+		TaotaoResult result = contentService.updateByContentId(content);
+		return result;
+	}
+	
 }

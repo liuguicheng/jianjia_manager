@@ -1,10 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.1/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.1/themes/icon.css" />
-<script type="text/javascript" src="/js/jquery-easyui-1.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="/js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
@@ -71,11 +65,12 @@ var contentEditPage = {
 			}
 			contentEditEditor.sync();
 			
-			$.post("/rest/content/edit.do",$("#contentEditForm").serialize(), function(data){
+			$.post("/content/content/edit.do",$("#contentEditForm").serialize(), function(data){
 				if(data.status == 200){
-					$.messager.alert('提示','新增内容成功!');
-					$("#contentList").datagrid("reload");
-					TT.closeCurrentWindow();
+					$.messager.alert('提示','修改内容成功!',undefined,function(){
+    					$("#contentList").datagrid("reload");
+    					TT.closeCurrentWindow();
+    				});
 				}
 			});
 		},

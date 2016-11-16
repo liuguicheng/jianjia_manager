@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
 	<form id="contentAddForm" class="itemForm" method="post">
 		<input type="hidden" name="categoryId"/>
@@ -65,9 +67,10 @@
 				
 				$.post("/content/save.do",$("#contentAddForm").serialize(), function(data){
 					if(data.status == 200){
-						$.messager.alert('提示','新增内容成功!');
-    					$("#contentList").datagrid("reload");
-    					TT.closeCurrentWindow();
+		        				$.messager.alert('提示','新增内容成功!',undefined,function(){
+		        					$("#contentList").datagrid("reload");
+		        					TT.closeCurrentWindow();
+		        				});
 					}
 				});
 			},

@@ -10,5 +10,7 @@ public interface ContentService {
 
 	EUDataGridResult findContentByCategoryId(Long categoryId, Integer page, Integer rows);
 
-	TaotaoResult deleteByContentId(Long ids);
+	TaotaoResult deleteByContentId(String ids);
+
+	TaotaoResult updateByContentId(TbContent content);
 }
