@@ -1,0 +1,240 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link href="../../skins/skinsH/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../skins/skinsH/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href="../../skins/skinsH/css/plugins/bootstrap-table/bootstrap-table.min.css"
+	rel="stylesheet">
+<link href="../../skins/skinsH/css/animate.min.css" rel="stylesheet">
+<link href="../../skins/skinsH/css/style.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="../../skins/skinsH/css/plugins/layer/layer.css"
+	id="layui_layer_skinlayercss">
+<link rel="stylesheet"
+	href="../../skins/skinsH/css/plugins/layer/layer.ext.css"
+	id="layui_layer_skinlayerextcss">
+<link rel="stylesheet"
+	href="../../skins/skinsH/css/plugins/layer/moon_style.css"
+	id="layui_layer_skinmoonstylecss">
+<!-- Sweet Alert -->
+<link href="../../skins/skinsH/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5 class="example-title" id="titleid">会员管理</h5>
+			</div>
+			<div class="ibox-content">
+				<div id="toolbar" class="btn-group">
+					<a class=" btn btn-outline  btn-default" href="javascript:void(0);"
+						id="addid"><i class="glyphicon glyphicon-plus"></i>新增 </a>
+						<a class=" btn btn-outline  btn-default" href="javascript:void(0);"
+						id="delid"><i class="glyphicon glyphicon-edit"></i>重置登陆密码 </a>
+					<a class=" btn btn-outline  btn-default" href="javascript:void(0);"
+						id="delid"><i class="glyphicon glyphicon-trash"></i>删除 </a>
+				</div>
+				<table id="table" data-toggle="table" data-url="/member/list.do"
+					data-sort-name="created" data-sort-order="desc" data-search="true"
+					data-show-refresh="true" data-show-toggle="true"
+					data-show-columns="true" data-pagination="true"
+					data-toolbar="#toolbar" data-query-params="queryParams"
+					data-height="548">
+					<thead>
+						<tr>
+							<th data-field="stat" data-checkbox="true"></th>
+							<th data-field="username" data-formatter="onmemberselect">会员名</th>
+							<th data-field="email" data-sortable="true">邮箱</th>
+							<th data-field="phone" data-sortable="true">手机号码</th>
+							<th data-formatter="runningFormatter">注册时间</th>
+							<th data-formatter="cazuoFormatter">操作</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="clearfix"></div>
+
+		</div>
+		<script src="../../skins/skinsH/js/jquery.min.js"></script>
+		<script src="../../skins/skinsH/js/bootstrap.min.js"></script>
+		<script
+			src="../../skins/skinsH/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+		<script
+			src="../../skins/skinsH/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+		<script
+			src="../../skins/skinsH/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+		<script src="../../skins/skinsH/js/plugins/layer/layer.min.js"></script>
+		<script
+			src="../../skins/skinsH/js/plugins/sweetalert/sweetalert.min.js"></script>
+		<script type="text/javascript">
+		/** 
+		 * 时间对象的格式化; 
+		 */  
+		 function formatdate(time) {  
+			 var format= 'yyyy-MM-dd HH:mm:ss';
+			 var t = new Date(time);
+			    var tf = function(i){return (i < 10 ? '0' : '') + i};
+			    return format.replace(/yyyy|MM|dd|HH|mm|ss/g, function(a){
+			        switch(a){
+			            case 'yyyy':
+			                return tf(t.getFullYear());
+			                break;
+			            case 'MM':
+			                return tf(t.getMonth() + 1);
+			                break;
+			            case 'mm':
+			                return tf(t.getMinutes());
+			                break;
+			            case 'dd':
+			                return tf(t.getDate());
+			                break;
+			            case 'HH':
+			                return tf(t.getHours());
+			                break;
+			            case 'ss':
+			                return tf(t.getSeconds());
+			                break;
+			        }
+			    })
+		}
+			//搜索参数
+			function queryParams() {
+				return {
+					type : 'owner',
+					rows : 20,
+					page : 1
+				};
+			}
+			//自定义tr
+			function runningFormatter(value, row, index) {
+				if (row.created!=null) {
+					
+					return formatdate(row.created);
+				}else{
+					return "";
+				}
+			}
+			function onmemberselect(value, row, index){
+				var s="<a href=/plugins/member/member-update.do?id="+ row.id+">"+value+"</a>";
+				return s;
+			}
+			function cazuoFormatter(value, row, index){
+				return "<div class=\"hover\">"+"<a href=\"#\" style=\"font-size:12px;color:black;\"><i class=\"fa fa-home\"></i>&nbsp;个人资料</a> "+"&nbsp;&nbsp;"
+						+"<a href=\"#\" style=\"font-size:12px;color:black;\"><i class=\"fa fa-unlock-alt\"></i>&nbsp;安全设置</a> "+"&nbsp;&nbsp;"
+						+"<a href=\"#\" style=\"font-size:12px;color:black;\"><i class=\"fa fa-cubes\"></i>&nbsp;收货地址</a> "+"&nbsp;&nbsp;"+
+						"</div>";
+			}
+			$(document)
+					.ready(
+							function() {
+								//新增
+								$("#addid")
+										.click(
+												function() {
+													window.location.href = "/plugins/member/member-add.do";
+												});
+								//删除
+								$("#delid")
+										.click(
+												function() {
+													var $table = $('#table');
+													//获取选择行内容
+													var selects = $table
+															.bootstrapTable('getSelections');
+													var selectsidjson = onselectid(selects);
+													if (selectsidjson.length > 0) {
+
+														swal(
+																{
+																	title : "你确定?",
+																	text : "删除的数据将无法恢复!",
+																	type : "warning",
+																	showCancelButton : true,
+																	confirmButtonColor : "#DD6B55",
+																	confirmButtonText : "是",
+																	cancelButtonText : "否",
+																	closeOnConfirm : false
+																},
+																function(
+																		isConfirm) {
+																	if (isConfirm) {
+																		$
+																				.ajax({
+																					type : "post",
+																					url : "/member/del.do",
+																					data : "ids="
+																							+ selectsidjson,// ,
+																					dataType : "json",
+																					success : function(
+																							data) {
+																						if (data.status == "200") {
+																							swal(
+																									{
+																										title : "操作提示",
+																										text : "删除成功",
+																										type : "success",
+																										closeOnConfirm : false
+																									},
+																									function() {
+																										location
+																												.reload()
+																									});
+																						} else {
+																							swal({
+																								title : "操作提示",
+																								text : "删除失败",
+																								type : "error",
+																								closeOnConfirm : false
+																							})
+																						}
+																					}
+																				});
+																	}
+																});
+
+													} else {
+														swal("提示", "请选择要删除的用户",
+																"warning");
+													}
+
+												});
+
+							//	$("#table")
+								//		.on(
+								//				'click-row.bs.table',
+								//				function(e, row, $element) {
+								//					console.log(e);
+								//					$('.success').removeClass(
+								//							'success');
+								//					$($element).addClass(
+								//							'success');
+								//					window.location.href = "/plugins/member/member-update.do?id="
+								//							+ row.id;
+									//			});
+
+							});
+			// 根据json 获取 选中id
+			function onselectid(selects) {
+				var str = "";
+				var newSelects = $.parseJSON(JSON.stringify(selects));
+				$.each(newSelects, function(n, value) {
+					str += value.id + ",";
+				});
+				str = str.substring(0, str.length - 1);
+				return str;
+			}
+		</script>
+		<script type="text/javascript" src="../../skins/default/js/index.js"></script>
+		<script src="../../skins/skinsH/js/contabs.min.js"
+			type="text/javascript"></script>
+</body>
+</html>

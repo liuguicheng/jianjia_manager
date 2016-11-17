@@ -1,4 +1,4 @@
-package com.taotao.controller.mall;
+package com.taotao.controller.mall.picture;
 
 import java.util.Map;
 

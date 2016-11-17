@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link href="../../skins/skinsH/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../skins/skinsH/css/font-awesome.min.css"
+	rel="stylesheet">
+<link href="../../skins/skinsH/css/animate.min.css" rel="stylesheet">
+<link href="../../skins/skinsH/css/style.min.css" rel="stylesheet">
+<!-- Sweet Alert -->
+<link href="../../skins/skinsH/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5 class="example-title" id="titleid">修改会员登陆信息</h5>
+			</div>
+			<div class="ibox-content">
+				<form class="form-horizontal m-t" id="signupForm" method="post"
+					action="">
+					<input id="id" name="id" type="hidden">
+					<input id="password" name="password" type="hidden">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">用户名：</label>
+						<div class="col-sm-8">
+							<input id="username" name="username" class="form-control"
+								type="text" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">手机号码：</label>
+						<div class="col-sm-8">
+							<input id="phone" name="phone" class="form-control" type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">常用邮箱：</label>
+						<div class="col-sm-8">
+						<input id="email" name="email" class="form-control" type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-8 col-sm-offset-3">
+							<button class="btn btn-primary" type="submit">提交</button>
+							<button class="btn btn-warning" type="button"
+								onclick="goIndex(-1);">返回</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="clearfix"></div>
+		</div>
+
+	</div>
+	<script src="../../skins/skinsH/js/jquery.min.js"></script>
+	<script src="../../skins/skinsH/js/bootstrap.min.js"></script>
+	<script
+		src="../../skins/skinsH/js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="../../skins/skinsH/js/plugins/validate/messages_zh.min.js"></script>
+	
+	<script
+		src="../../skins/skinsH/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<!-- 自己写 -->
+	<script type="text/javascript" src="../../skins/default/js/index.js"></script>
+	<script type="text/javascript"
+		src="../../skins/default/js/member-validate.min.js"></script>
+
+</body>
+</html>

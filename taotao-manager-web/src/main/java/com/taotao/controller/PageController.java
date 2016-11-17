@@ -35,21 +35,21 @@ public class PageController {
 	
 	
 	/**
-	 * 展示其他页面 console目录下
+	 * 后台-通用内容管理、登陆、首页等
 	 */
 	@RequestMapping("/console/main/{page}")
 	public String showpage2(@PathVariable String page) {
 		return "console/main/"+page;
 	}
 	/**
-	 * 展示其他页面 plugins目录commodity下
+	 * 后台-商品管理
 	 */
 	@RequestMapping("/plugins/commodity/{page}")
 	public String showpage3(@PathVariable String page) {
 		return "plugins/commodity/"+page;
 	}
 	/**
-	 * 展示其他页面 plugins/common目录下
+	 * 后台图片管理
 	 */
 	@RequestMapping("/plugins/common/{page}")
 	public String showpage4(@PathVariable String page) {
@@ -57,18 +57,19 @@ public class PageController {
 	}
 	
 	/**
-	 * 展示其他页面 plugins/content目录下
+	 * 后台-内容管理
 	 */
 	@RequestMapping("/plugins/content/{page}")
 	public String showpage5(@PathVariable String page) {
 		return "plugins/content/"+page;
 	}
 	
+	
 	/**
-	 * 展示其他页面 plugins/system目录下
+	 * 会员管理
 	 */
-	@RequestMapping("/plugins/system/{page}")
-	public String showpage6(@PathVariable String page) {
-		return "plugins/system/"+page;
+	@RequestMapping("/plugins/member/{page}")
+	public String showpage7(@PathVariable String page) {
+		return "plugins/member/"+page;
 	}
 }
